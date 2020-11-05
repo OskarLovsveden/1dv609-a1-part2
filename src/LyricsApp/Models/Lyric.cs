@@ -12,7 +12,17 @@ namespace Model
 
         public int CountAllWords()
         {
-            return 5;
+            int numberOfWords = 1;
+            int increment = 0;
+
+            while (increment <= _lyricText.Length -1)
+            {
+                if(_lyricText[increment]  == ' ' || _lyricText[increment] == '\n' || _lyricText[increment] == '\t') {
+                    numberOfWords++;
+                }
+                increment++;
+            }
+            return numberOfWords;
         }
     }
 }
