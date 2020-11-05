@@ -18,7 +18,7 @@ namespace Model
 
         public int CountOccurrencesOfWord(string toBeCounted)
         {
-            return Regex.Matches(_lyricText, toBeCounted, RegexOptions.IgnoreCase).Count;
+            return Regex.Matches(_lyricText, "\\b" + Regex.Escape(toBeCounted) + "\\b", RegexOptions.IgnoreCase).Count;
         }
     }
 }
