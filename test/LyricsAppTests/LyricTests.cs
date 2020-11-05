@@ -15,10 +15,10 @@ namespace LyricsAppTests
         {
             Lyric sut = new Lyric(lyricText);
 
-            int actual = sut.CountAllWords();
             int expected = wordAmount;
+            int actual = sut.CountAllWords();
 
-            Assert.Equal(actual, expected);
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -29,10 +29,10 @@ namespace LyricsAppTests
         {
             Lyric sut = new Lyric(lyricText);
 
-            int actual = sut.CountOccurrencesOfWord(word);
             int expected = occurrences;
+            int actual = sut.CountOccurrencesOfWord(word);
 
-            Assert.Equal(actual, expected);
+            Assert.Equal(expected, actual);
         }
     }
 }
