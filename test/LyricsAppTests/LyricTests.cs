@@ -6,7 +6,7 @@ namespace LyricsAppTests
     public class LyricTests
     {
         [Fact]
-        public void ShouldReturnCountWordsInLyric()
+        public void ShouldReturnAmountOfWordsInLyricText()
         {
             Lyric sut = new Lyric("Never gonna give you up, never gonna let you down.");
 
