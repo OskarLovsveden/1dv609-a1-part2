@@ -28,6 +28,7 @@ namespace LyricsAppTests
         [InlineData("Cheese ham, hamster tuna cat dog hammer.", 1, "ham")]
         [InlineData("Cheese ham, hamster cat dog-hammer.", 1, "dog-hammer")]
         [InlineData("Cheese ham, hamster is cat tuna is'nt dog-hammer.", 1, "is")]
+        [InlineData("Boats and Cars should'nt fly but they should move, shouldnt they?", 2, "should'nt")]
         public void ShouldReturnOccurrencesOfWordInLyricText(string lyricText, int occurrences, string word)
         {
             Lyric sut = new Lyric(lyricText);
