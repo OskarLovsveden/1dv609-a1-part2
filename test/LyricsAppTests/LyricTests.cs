@@ -20,5 +20,17 @@ namespace LyricsAppTests
 
             Assert.Equal(actual, expected);
         }
+
+        [Theory]
+        [InlineData("Black and yellow, black and yellow Black and yellow, black and yellow", 4, "yellow")]
+        public void ShouldReturnOccurrencesOfWordInLyricText(string lyricText, int occurrences, string word)
+        {
+            Lyric sut = new Lyric(lyricText);
+
+            int actual = sut.CountOccurrencesOfWord(word);
+            int expected = occurrences;
+
+            Assert.Equal(actual, expected);
+        }
     }
 }

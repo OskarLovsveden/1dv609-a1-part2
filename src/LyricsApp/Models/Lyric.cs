@@ -16,5 +16,10 @@ namespace Model
 
             return r.Matches(_lyricText).Count;
         }
+
+        public int CountOccurrencesOfWord(string toBeCounted)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
