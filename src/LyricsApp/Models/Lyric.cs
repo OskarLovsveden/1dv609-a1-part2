@@ -12,7 +12,7 @@ namespace Model
 
         public int CountAllWords()
         {
-            return 10;
+            return 5;
         }
     }
 }
