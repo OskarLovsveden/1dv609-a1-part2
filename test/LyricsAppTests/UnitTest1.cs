@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace WeatherAppTests
+namespace LyricsAppTests
 {
     public class UnitTest1
     {

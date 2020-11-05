@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WeatherApp\WeatherApp.csproj" />
+    <ProjectReference Include="..\..\src\LyricsApp\LyricsApp.csproj" />
   </ItemGroup>
 
 </Project>
