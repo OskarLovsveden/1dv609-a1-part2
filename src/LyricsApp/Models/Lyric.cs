@@ -17,7 +17,7 @@ namespace Model
 
             while (increment <= _lyricText.Length -1)
             {
-                if(_lyricText[increment]  == ' ' || _lyricText[increment] == '\n' || _lyricText[increment] == '\t') {
+                if((_lyricText[increment]  == ' ' || _lyricText[increment] == '\n' || _lyricText[increment] == '\t') && _lyricText[increment -1] != '-') {
                     numberOfWords++;
                 }
                 increment++;
