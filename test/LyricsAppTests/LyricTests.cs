@@ -8,10 +8,10 @@ namespace LyricsAppTests
         [Fact]
         public void ShouldReturnAmountOfWordsInLyricText()
         {
-            Lyric sut = new Lyric("Never gonna give you up, never gonna let you down.");
+            Lyric sut = new Lyric("Never gonna give you up.");
 
             int actual = sut.CountAllWords();
-            int expected = 10;
+            int expected = 5;
 
             Assert.Equal(actual, expected);
         }
