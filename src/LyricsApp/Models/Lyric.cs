@@ -1,5 +1,5 @@
 using System;
-
+using System.Text.RegularExpressions;
 namespace Model
 {
     public class Lyric
@@ -12,17 +12,9 @@ namespace Model
 
         public int CountAllWords()
         {
-            int numberOfWords = 1;
-            int increment = 0;
+            Regex r = new Regex(@"(?!'.*')\b[\w'-]+\b");
 
-            while (increment <= _lyricText.Length -1)
-            {
-                if((_lyricText[increment]  == ' ' || _lyricText[increment] == '\n' || _lyricText[increment] == '\t') && _lyricText[increment -1] != '-') {
-                    numberOfWords++;
-                }
-                increment++;
-            }
-            return numberOfWords;
+            return r.Matches(_lyricText).Count;
         }
     }
 }
