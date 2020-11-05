@@ -26,6 +26,8 @@ namespace LyricsAppTests
         [InlineData("It's raining tacos From out of the sky. Tacos!" +
         " No need to ask why. Just open your mouth and close your eyes. It's raining tacos", 3, "tacos")]
         [InlineData("Cheese ham, hamster tuna cat dog hammer.", 1, "ham")]
+        [InlineData("Cheese ham, hamster cat dog-hammer.", 1, "dog-hammer")]
+        [InlineData("Cheese ham, hamster is cat tuna is'nt dog-hammer.", 1, "is")]
         public void ShouldReturnOccurrencesOfWordInLyricText(string lyricText, int occurrences, string word)
         {
             Lyric sut = new Lyric(lyricText);
