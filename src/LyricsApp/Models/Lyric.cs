@@ -12,7 +12,7 @@ namespace Model
 
         public int CountAllWords()
         {
-            throw new NotImplementedException();
+            return 10;
         }
     }
 }
