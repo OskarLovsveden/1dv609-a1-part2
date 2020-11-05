@@ -1,3 +1,5 @@
+using System;
+
 namespace Model
 {
     public class Lyric
@@ -6,6 +8,11 @@ namespace Model
         public Lyric(string lyricText)
         {
             _lyricText = lyricText;
+        }
+
+        public int CountAllWords()
+        {
+            throw new NotImplementedException();
         }
     }
 }
