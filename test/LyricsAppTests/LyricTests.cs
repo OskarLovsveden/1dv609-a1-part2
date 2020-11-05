@@ -1,12 +1,13 @@
 using System;
 using Xunit;
+using Model;
 
 namespace LyricsAppTests
 {
-    public class UnitTest1
+    public class LyricTests
     {
         [Fact]
-        public void Test1()
+        public void ShouldReturnCountWordsInLyric()
         {
 
         }
