@@ -18,8 +18,9 @@ namespace Model
 
         public int CountOccurrencesOfWord(string toBeCounted)
         {
-            string lyrics = _lyricText.Replace("'", "");
-            return Regex.Matches(lyrics, "\\b" + Regex.Escape(toBeCounted) + "\\b", RegexOptions.IgnoreCase).Count;
+            string toBeCountedStripped = toBeCounted.Replace("'", "");
+            string lyricsTextStripped = _lyricText.Replace("'", "");
+            return Regex.Matches(lyricsTextStripped, "\\b" + Regex.Escape(toBeCountedStripped) + "\\b", RegexOptions.IgnoreCase).Count;
         }
     }
 }
