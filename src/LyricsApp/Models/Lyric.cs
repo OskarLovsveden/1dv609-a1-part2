@@ -18,6 +18,12 @@ namespace Model
 
         public int CountOccurrencesOfWord(string toBeCounted)
         {
+            Regex r = new Regex(@"(?!'.*')\b[\w'-]+\b");
+            if (!r.IsMatch(toBeCounted))
+            {
+                throw new ArgumentException();
+            }
+
             string toBeCountedStripped = toBeCounted.Replace("'", "");
             string lyricsTextStripped = _lyricText.Replace("'", "");
             return Regex.Matches(lyricsTextStripped, "\\b" + Regex.Escape(toBeCountedStripped) + "\\b", RegexOptions.IgnoreCase).Count;
