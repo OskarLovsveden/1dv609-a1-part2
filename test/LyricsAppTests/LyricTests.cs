@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 using Model;
 
@@ -40,6 +41,13 @@ namespace LyricsAppTests
             int actual = sut.CountOccurrencesOfWord(word);
 
             Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void ShouldThrowExceptionOnNotAWordOrNumber()
+        {
+            Lyric sut = new Lyric("It's raining tacos From out of the sky.");
+            string input = " ";
+            Assert.Throws<ArgumentException>(() => sut.CountOccurrencesOfWord(input));
         }
     }
 }
