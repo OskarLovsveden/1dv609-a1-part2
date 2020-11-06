@@ -10,6 +10,7 @@ namespace LyricsAppTests
         [InlineData("and both shall row - my love and I", 8)]
         [InlineData("love & I", 2)]
         [InlineData("Oh-la-la \n", 1)]
+        [InlineData("Oh-la-la\rOh oh", 3)]
         [InlineData("", 0)]
         public void ShouldReturnAmountOfWordsInLyricText(string lyricText, int wordAmount)
         {
@@ -29,6 +30,8 @@ namespace LyricsAppTests
         [InlineData("Cheese ham, hamster cat dog-hammer.", 1, "dog-hammer")]
         [InlineData("Cheese ham, hamster is cat tuna is'nt dog-hammer.", 1, "is")]
         [InlineData("Boats and Cars should'nt fly but they should move, shouldnt they?", 2, "should'nt")]
+        [InlineData("Sol (vind) och vind och ost utan vatten. för det är blä", 2, "vind")]
+        [InlineData("Sol (vind) och vind och ost är ost utan vatten. för det \rär blä", 2, "är")]
         public void ShouldReturnOccurrencesOfWordInLyricText(string lyricText, int occurrences, string word)
         {
             Lyric sut = new Lyric(lyricText);
