@@ -8,7 +8,7 @@ namespace LyricsAppTests
     {
         [Theory]
         [InlineData("Aa Bb Cc", 3)]
-        [InlineData("", 0)]
+        [InlineData(" ", 0)]
         public void CountAllWords_OnlyWords_ReturnAmountOfWords(string input, int expected)
         {
             Assert_CountAllWords(input, expected);
@@ -83,7 +83,7 @@ namespace LyricsAppTests
         [Fact]
         public void WordFrequency_EmptyString_ThrowsArgumentException()
         {
-            Lyric sut = new Lyric("");
+            Lyric sut = new Lyric("Aa bb cc");
             string input = "";
             Assert.Throws<ArgumentException>(() => sut.WordFrequency(input));
         }

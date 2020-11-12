@@ -7,6 +7,10 @@ namespace Model
         private string _lyricText;
         public Lyric(string lyricText)
         {
+            if (lyricText.Length < 1)
+            {
+                throw new ArgumentException("Lyric text cant be empty");
+            }
             _lyricText = lyricText;
         }
 
