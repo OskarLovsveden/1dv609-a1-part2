@@ -97,10 +97,11 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void Lyric_Constructor_EmptyString_ThrowsArgumentException()
+        [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void Lyric_Constructor_EmptyString_ThrowsArgumentException(string input)
         {
-            string input = "";
             Assert.Throws<ArgumentException>(() => new Lyric(input));
         }
     }
