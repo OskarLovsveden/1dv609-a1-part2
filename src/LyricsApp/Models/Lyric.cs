@@ -38,9 +38,14 @@ namespace Model
                 throw new ArgumentException();
             }
 
-            string toBeCountedStripped = StripApostrophes(toBeCounted);
-            string lyricsTextStripped = StripApostrophes(_lyricText);
-            return Regex.Matches(lyricsTextStripped, "\\b" + Regex.Escape(toBeCountedStripped) + "\\b", RegexOptions.IgnoreCase).Count;
+            return CountWordFrequency(toBeCounted);
+        }
+
+        private int CountWordFrequency(string toBeCounted)
+        {
+            string pattern = "\\b" + Regex.Escape(StripApostrophes(toBeCounted)) + "\\b";
+
+            return Regex.Matches(StripApostrophes(_lyricText), pattern , RegexOptions.IgnoreCase).Count;
         }
 
         private string StripApostrophes(string toBeStripped)
