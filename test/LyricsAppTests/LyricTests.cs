@@ -7,47 +7,94 @@ namespace LyricsAppTests
     public class LyricTests
     {
         [Theory]
-        [InlineData("We're no strangers to love. You know the rules and so do I", 13)]
-        [InlineData("and both shall row - my love and I", 8)]
-        [InlineData("love & I", 2)]
-        [InlineData("Oh-la-la \n", 1)]
-        [InlineData("Oh-la-la\rOh oh", 3)]
+        [InlineData("Aa Bb Cc", 3)]
         [InlineData("", 0)]
-        public void ShouldReturnAmountOfWordsInLyricText(string lyricText, int wordAmount)
+        public void CountAllWords_OnlyWords_ReturnAmountOfWords(string input, int expected)
         {
-            Lyric sut = new Lyric(lyricText);
+            Assert_CountAllWords(input, expected);
+        }
 
-            int expected = wordAmount;
+        [Theory]
+        [InlineData("Aa - . & / ! ¤ # Bb Cc", 3)]
+        [InlineData("Aa\rBb\nCc", 3)]
+        public void CountAllWords_WordsAndSpecialCharacters_ReturnAmountOfWords(string input, int expected)
+        {
+           Assert_CountAllWords(input, expected);
+        }
+        
+        [Theory]
+        [InlineData("Aa-Bb-Cc", 1)]
+        [InlineData("Aa-Bb-Cc a'b", 2)]
+        public void CountAllWords_WordsWithSeparators_ReturnAmountOfWords(string input, int expected)
+        {
+            Assert_CountAllWords(input, expected);
+        }
+
+        private void Assert_CountAllWords(string input, int expected)
+        {
+            Lyric sut = new Lyric(input);
+
             int actual = sut.CountAllWords();
 
             Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData("Black and yellow, black and yellow Black and yellow, black and yellow", 4, "yellow")]
-        [InlineData("It's raining tacos From out of the sky. Tacos!" +
-        " No need to ask why. Just open your mouth and close your eyes. It's raining tacos", 3, "tacos")]
-        [InlineData("Cheese ham, hamster tuna cat dog hammer.", 1, "ham")]
-        [InlineData("Cheese ham, hamster cat dog-hammer.", 1, "dog-hammer")]
-        [InlineData("Cheese ham, hamster is cat tuna is'nt dog-hammer.", 1, "is")]
-        [InlineData("Boats and Cars should'nt fly but they should move, shouldnt they?", 2, "should'nt")]
-        [InlineData("Sol (vind) och vind och ost utan vatten. för det är blä", 2, "vind")]
-        [InlineData("Sol (vind) och vind och ost är ost utan vatten. för det \rär blä", 2, "är")]
-        public void ShouldReturnOccurrencesOfWordInLyricText(string lyricText, int occurrences, string word)
+        [InlineData("Aa bb Aa bb", "bb", 2)]
+        [InlineData("Aa bb aa bb", "aa", 2)]
+        [InlineData("Aa bb aa bb aa'bb", "aa", 2)]
+        public void WordFrequency_Word_ReturnsWordFrequencyCaseInsensitive(string inputText, string inputWord, int expected)
         {
-            Lyric sut = new Lyric(lyricText);
+           Assert_WordFrequency(inputText, inputWord, expected);
+        }
+        
+        [Theory]
+        [InlineData("Aa bb aa bb aa-bb", "aa-bb", 1)]
+        [InlineData("Aa bb aab bb aa'b", "aa'b", 2)]
+        public void WordFrequency_Word_ReturnsWordFrequencyOfWordWithOrWithoutSeparator(string inputText, string inputWord, int expected)
+        {
+           Assert_WordFrequency(inputText, inputWord, expected);
+        }
 
-            int expected = occurrences;
-            int actual = sut.CountOccurrencesOfWord(word);
+        [Theory]
+        [InlineData("Aa (bb) Aa bb {bb}", "bb", 3)]
+        [InlineData("Aa \"bb\" Aa bb", "bb", 2)]
+        public void WordFrequency_Word_ReturnsWordFrequencyOfWordIgnoringWordWrappers(string inputText, string inputWord, int expected)
+        {
+           Assert_WordFrequency(inputText, inputWord, expected);
+        }
+
+        [Theory]
+        [InlineData("Aa bb aa\raa", "aa", 3)]
+        [InlineData("Aa bb aa\taa", "aa", 3)]
+        [InlineData("Aa bb aa\naa", "aa", 3)]
+        public void WordFrequency_Word_ReturnsWordFrequencyOfWordIgnoringEscapeSequence(string inputText, string inputWord, int expected)
+        {
+           Assert_WordFrequency(inputText, inputWord, expected);
+        }
+
+        [Theory]
+        [InlineData("Ää Åå ää Öö", "ää", 2)]
+        public void WordFrequency_Word_ReturnsWordFrequencyOfWordWithSwedishLetters(string inputText, string inputWord, int expected)
+        {
+           Assert_WordFrequency(inputText, inputWord, expected);
+        }
+
+        [Fact]
+        public void WordFrequency_EmptyString_ThrowsArgumentException()
+        {
+            Lyric sut = new Lyric("");
+            string input = "";
+            Assert.Throws<ArgumentException>(() => sut.WordFrequency(input));
+        }
+
+        private void Assert_WordFrequency(string inputText, string inputWord, int expected)
+        {
+            Lyric sut = new Lyric(inputText);
+
+            int actual = sut.WordFrequency(inputWord);
 
             Assert.Equal(expected, actual);
-        }
-        [Fact]
-        public void ShouldThrowExceptionOnNotAWordOrNumber()
-        {
-            Lyric sut = new Lyric("It's raining tacos From out of the sky.");
-            string input = " ";
-            Assert.Throws<ArgumentException>(() => sut.CountOccurrencesOfWord(input));
         }
     }
 }

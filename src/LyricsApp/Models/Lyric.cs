@@ -16,7 +16,7 @@ namespace Model
             return r.Matches(_lyricText).Count;
         }
 
-        public int CountOccurrencesOfWord(string toBeCounted)
+        public int WordFrequency(string toBeCounted)
         {
             Regex r = new Regex(@"(?!'.*')\b[\w'-]+\b");
             if (!r.IsMatch(toBeCounted))
