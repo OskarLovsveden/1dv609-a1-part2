@@ -19,9 +19,9 @@ namespace LyricsAppTests
         [InlineData("Aa\rBb\nCc", 3)]
         public void CountAllWords_WordsAndSpecialCharacters_ReturnAmountOfWords(string input, int expected)
         {
-           Assert_CountAllWords(input, expected);
+            Assert_CountAllWords(input, expected);
         }
-        
+
         [Theory]
         [InlineData("Aa-Bb-Cc", 1)]
         [InlineData("Aa-Bb-Cc a'b", 2)]
@@ -45,15 +45,15 @@ namespace LyricsAppTests
         [InlineData("Aa bb aa bb aa'bb", "aa", 2)]
         public void WordFrequency_Word_ReturnsWordFrequencyCaseInsensitive(string inputText, string inputWord, int expected)
         {
-           Assert_WordFrequency(inputText, inputWord, expected);
+            Assert_WordFrequency(inputText, inputWord, expected);
         }
-        
+
         [Theory]
         [InlineData("Aa bb aa bb aa-bb", "aa-bb", 1)]
         [InlineData("Aa bb aab bb aa'b", "aa'b", 2)]
         public void WordFrequency_Word_ReturnsWordFrequencyOfWordWithOrWithoutSeparator(string inputText, string inputWord, int expected)
         {
-           Assert_WordFrequency(inputText, inputWord, expected);
+            Assert_WordFrequency(inputText, inputWord, expected);
         }
 
         [Theory]
@@ -61,7 +61,7 @@ namespace LyricsAppTests
         [InlineData("Aa \"bb\" Aa bb", "bb", 2)]
         public void WordFrequency_Word_ReturnsWordFrequencyOfWordIgnoringWordWrappers(string inputText, string inputWord, int expected)
         {
-           Assert_WordFrequency(inputText, inputWord, expected);
+            Assert_WordFrequency(inputText, inputWord, expected);
         }
 
         [Theory]
@@ -70,14 +70,14 @@ namespace LyricsAppTests
         [InlineData("Aa bb aa\naa", "aa", 3)]
         public void WordFrequency_Word_ReturnsWordFrequencyOfWordIgnoringEscapeSequence(string inputText, string inputWord, int expected)
         {
-           Assert_WordFrequency(inputText, inputWord, expected);
+            Assert_WordFrequency(inputText, inputWord, expected);
         }
 
         [Theory]
         [InlineData("Ää Åå ää Öö", "ää", 2)]
         public void WordFrequency_Word_ReturnsWordFrequencyOfWordWithSwedishLetters(string inputText, string inputWord, int expected)
         {
-           Assert_WordFrequency(inputText, inputWord, expected);
+            Assert_WordFrequency(inputText, inputWord, expected);
         }
 
         [Fact]
@@ -95,6 +95,13 @@ namespace LyricsAppTests
             int actual = sut.WordFrequency(inputWord);
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Lyric_Constructor_EmptyString_ThrowsArgumentException()
+        {
+            string input = "";
+            Assert.Throws<ArgumentException>(() => new Lyric(input));
         }
     }
 }
