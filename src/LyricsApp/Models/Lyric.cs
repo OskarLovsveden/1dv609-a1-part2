@@ -16,7 +16,7 @@ namespace Model
                 Regex r = new Regex(@"\w");
                 if (!r.IsMatch(Regex.Escape(value)))
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Lyrictext can not be empty");
                 }
                 _lyricText = value;
             }
