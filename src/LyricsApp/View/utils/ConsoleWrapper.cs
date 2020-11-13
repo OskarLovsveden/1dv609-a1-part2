@@ -5,7 +5,7 @@ namespace View.utils
     {
         public void Write(string input)
         {
-            Console.Write("Hello World");
+            Console.Write(input);
         }
 
         public void WriteLine(string input)
