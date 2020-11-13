@@ -5,14 +5,14 @@ namespace View.utils
     {
         public void Write(string input)
         {
-            throw new NotImplementedException();
+            Console.Write("Hello World");
         }
 
         public void WriteLine(string input)
         {
             throw new NotImplementedException();
         }
-        
+
         public string ReadLine()
         {
             throw new NotImplementedException();
