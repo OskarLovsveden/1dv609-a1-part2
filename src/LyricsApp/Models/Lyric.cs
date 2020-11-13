@@ -11,12 +11,12 @@ namespace Model
         {
             get => _lyricText;
 
-            set 
+            private set
             {
                 Regex r = new Regex(@"\w");
                 if (!r.IsMatch(Regex.Escape(value)))
                 {
-                    throw new ArgumentException("Lyric text cant be empty");
+                    throw new ArgumentException();
                 }
                 _lyricText = value;
             }
@@ -45,7 +45,7 @@ namespace Model
         {
             string pattern = "\\b" + Regex.Escape(StripApostrophes(toBeCounted)) + "\\b";
 
-            return Regex.Matches(StripApostrophes(_lyricText), pattern , RegexOptions.IgnoreCase).Count;
+            return Regex.Matches(StripApostrophes(_lyricText), pattern, RegexOptions.IgnoreCase).Count;
         }
 
         private string StripApostrophes(string toBeStripped)

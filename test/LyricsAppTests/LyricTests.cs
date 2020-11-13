@@ -103,5 +103,28 @@ namespace LyricsAppTests
         {
             Assert.Throws<ArgumentException>(() => new Lyric(input));
         }
+
+        [Theory]
+        [InlineData("", "Lyrictext can not be empty")]
+        public void Lyric_Constructor_EmptyString_ThrowsArgumentExceptionWithMessage(string input, string expected)
+        {
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => new Lyric(input));
+
+            string actual = exception.Message;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("Aa Bb Cc")]
+        public void LyricGet_LyricText_ReturnsSameStringThatWasSet(string input)
+        {
+            Lyric sut = new Lyric(input);
+
+            string expected = input;
+            string actual = sut.LyricText;
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
