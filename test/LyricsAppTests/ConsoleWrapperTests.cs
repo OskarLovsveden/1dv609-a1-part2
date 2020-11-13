@@ -9,6 +9,7 @@ namespace LyricsAppTests
     {
         [Theory]
         [InlineData("Hello World")]
+        [InlineData("World Hello")]
         public void Write_TextToWrite_WritesTextToConsole(string input)
         {
             ConsoleWrapper sut = new ConsoleWrapper();
