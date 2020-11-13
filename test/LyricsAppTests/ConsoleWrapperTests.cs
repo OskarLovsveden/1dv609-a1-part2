@@ -19,13 +19,20 @@ namespace LyricsAppTests
                 Console.SetOut(sw);
                 sut.Write(input);
 
+                string expected = input;
                 string actual = sw.ToString();
-                Assert.Equal(input, actual);
 
-                StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
-                standardOutput.AutoFlush = true;
-                Console.SetOut(standardOutput); 
+                Assert.Equal(expected, actual);
             }
+
+            ResetConsole();
+        }
+
+        private void ResetConsole()
+        {
+            StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
+            standardOutput.AutoFlush = true;
+            Console.SetOut(standardOutput);
         }
     }
 }
