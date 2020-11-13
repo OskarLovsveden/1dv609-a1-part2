@@ -15,7 +15,7 @@ namespace View.utils
 
         public string ReadLine()
         {
-            throw new NotImplementedException();
+            return Console.ReadLine();
         }
 
     }
