@@ -28,6 +28,26 @@ namespace LyricsAppTests
             ResetConsole();
         }
 
+        [Theory]
+        [InlineData("Hello World")]
+        public void WriteLine_TextToWrite_WritesTextToConsole(string input)
+        {
+            ConsoleWrapper sut = new ConsoleWrapper();
+
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+                sut.WriteLine(input);
+
+                string expected = input;
+                string actual = sw.ToString().Trim();
+
+                Assert.Equal(expected, actual);
+            }
+
+            ResetConsole();
+        }
+
         private void ResetConsole()
         {
             StreamWriter standardOutput = new StreamWriter(Console.OpenStandardOutput());
