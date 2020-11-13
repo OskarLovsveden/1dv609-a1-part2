@@ -10,7 +10,7 @@ namespace View.utils
 
         public void WriteLine(string input)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(input);
         }
 
         public string ReadLine()
