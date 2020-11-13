@@ -12,25 +12,18 @@ namespace LyricsAppTests
         [InlineData("World Hello")]
         public void Write_TextToWrite_WritesTextToConsole(string input)
         {
-            ConsoleWrapper sut = new ConsoleWrapper();
-
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                sut.Write(input);
-
-                string expected = input;
-                string actual = sw.ToString();
-
-                Assert.Equal(expected, actual);
-            }
-
-            ResetConsole();
+            AssertWriteToConsole(input);
         }
 
         [Theory]
         [InlineData("Hello World")]
+        [InlineData("World Hello")]
         public void WriteLine_TextToWrite_WritesTextToConsole(string input)
+        {
+            AssertWriteToConsole(input);
+        }
+
+        private void AssertWriteToConsole(string input)
         {
             ConsoleWrapper sut = new ConsoleWrapper();
 
