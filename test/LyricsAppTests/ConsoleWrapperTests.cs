@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using System.IO;
 using View.utils;
+using Moq;
 
 namespace LyricsAppTests
 {
@@ -39,6 +40,25 @@ namespace LyricsAppTests
             }
 
             ResetConsole();
+        }
+
+        [Theory]
+        [InlineData("Hello World")]
+        public void ReadLine(string input)
+        {
+            ConsoleWrapper sut = new ConsoleWrapper();
+
+
+            using (StringReader sr = new StringReader(input))
+            {
+                Console.SetIn(sr);
+
+
+                string expected = input;
+                string actual = sut.ReadLine();
+
+                Assert.Equal(expected, actual);
+            }
         }
 
         private void ResetConsole()
