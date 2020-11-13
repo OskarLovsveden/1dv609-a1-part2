@@ -34,7 +34,6 @@ namespace LyricsAppTests
             Lyric sut = new Lyric(input);
 
             int actual = sut.CountAllWords();
-
             Assert.Equal(expected, actual);
         }
 
@@ -84,6 +83,7 @@ namespace LyricsAppTests
         {
             Lyric sut = new Lyric("Aa bb cc");
             string input = "";
+
             Assert.Throws<ArgumentException>(() => sut.WordFrequency(input));
         }
 
@@ -92,7 +92,6 @@ namespace LyricsAppTests
             Lyric sut = new Lyric(inputText);
 
             int actual = sut.WordFrequency(inputWord);
-
             Assert.Equal(expected, actual);
         }
 
@@ -111,7 +110,6 @@ namespace LyricsAppTests
             ArgumentException exception = Assert.Throws<ArgumentException>(() => new Lyric(input));
 
             string actual = exception.Message;
-
             Assert.Equal(expected, actual);
         }
 
