@@ -13,8 +13,7 @@ namespace Model
 
             private set
             {
-                Regex r = new Regex(@"\w");
-                if (!r.IsMatch(Regex.Escape(value)))
+                if (!Regex.IsMatch(Regex.Escape(value), @"\w"))
                 {
                     throw new ArgumentException("Lyrictext can not be empty");
                 }
