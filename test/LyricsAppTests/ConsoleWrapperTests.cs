@@ -34,11 +34,6 @@ namespace LyricsAppTests
         [InlineData("World Hello")]
         public void WriteLine_TextToWrite_WritesTextToConsole(string input)
         {
-            AssertWriteToConsole(input);
-        }
-
-        private void AssertWriteToConsole(string input)
-        {
             ConsoleWrapper sut = new ConsoleWrapper();
 
             using (StringWriter sw = new StringWriter())
