@@ -5,7 +5,11 @@ namespace Model
     public class Artist : IArtist
     {
         private string _name;
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name
+        {
+            get => _name;
+            private set => _name = value;
+        }
 
         public Artist(string name)
         {

@@ -2,10 +2,6 @@ namespace Model
 {
     public interface IArtist
     {
-        string Name
-        {
-            get;
-            set;
-        }
+        string Name { get; }
     }
 }
