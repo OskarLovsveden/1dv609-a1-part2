@@ -6,6 +6,12 @@ namespace LyricsAppTests
 {
     public class TitleTests
     {
+        [Fact]
+        public void SetTitleName_EmptyString_ThrowsArgumentException()
+        {
+            string input = "";
+            Assert.Throws<ArgumentException>(() => new Title(input));
+        }
 
         [Fact]
         public void GetTitle_Name_ReturnsTheSetName()
