@@ -4,8 +4,8 @@
 
 A simple app for showing data about a songs lyric.
 
-dotnet new sln -n XUnit.Coverage
-reportgenerator "-reports:TestResults\cfc95be6-56e2-43cd-8bcf-67535652ccff\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+dotnet test --collect:"XPlat Code Coverage"
+reportgenerator "-reports:TestResults\GUID\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
 
 ### TODO
 
