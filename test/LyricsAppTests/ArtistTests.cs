@@ -16,7 +16,7 @@ namespace LyricsAppTests
         [Fact]
         public void GetName_Name_ReturnsTheSetName()
         {
-            string input = "Cool guy";
+            string input = "Artist Name";
 
             Artist sut = new Artist(input);
 

@@ -8,15 +8,19 @@ namespace Model
         public string Name
         {
             get => _name;
-            private set => _name = value;
+            private set
+            {
+                if (value.Length < 1)
+                {
+                    throw new ArgumentException();
+                }
+
+                _name = value;
+            }
         }
 
         public Artist(string name)
         {
-            if (name.Length < 1)
-            {
-                throw new ArgumentException();
-            }
             Name = name;
         }
     }
