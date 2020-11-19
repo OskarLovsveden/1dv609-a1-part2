@@ -15,6 +15,11 @@ namespace Model
                     throw new ArgumentException();
                 }
 
+                if (value.Length > 100)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+
                 _name = value;
             }
         }
