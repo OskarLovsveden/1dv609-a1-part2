@@ -14,7 +14,7 @@ namespace LyricsAppTests
         }
 
         [Fact]
-        public void GetTitle_Name_ReturnsTheSetName()
+        public void GetTitleName_Name_ReturnsTheSetName()
         {
             string input = "Song Title";
 
