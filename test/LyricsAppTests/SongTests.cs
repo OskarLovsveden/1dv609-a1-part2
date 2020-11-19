@@ -10,11 +10,12 @@ namespace LyricsAppTests
         public void GetArtistName_ShouldReturnArtistName()
         {
             string input = "Artist Name";
-            Mock<IArtist> mockArtist = new Mock<IArtist>();
-            mockArtist.Setup(artist => artist.Name).Returns(input);
+            Mock<IArtist> mockArtist = GetNewMockArtist();
+            Mock<ITitle> mockTitle = GetNewMockTitle();
+            Mock<ILyric> mockLyric = GetNewMockLyric();
 
-            Mock<ITitle> mockTitle = new Mock<ITitle>();
-            Mock<ILyric> mockLyric = new Mock<ILyric>();
+
+            mockArtist.Setup(artist => artist.Name).Returns(input);
 
             Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
 
@@ -23,5 +24,9 @@ namespace LyricsAppTests
 
             Assert.Equal(expected, actual);
         }
+
+        private Mock<IArtist> GetNewMockArtist() => new Mock<IArtist>();
+        private Mock<ITitle> GetNewMockTitle() => new Mock<ITitle>();
+        private Mock<ILyric> GetNewMockLyric() => new Mock<ILyric>();
     }
 }
