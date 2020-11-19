@@ -9,7 +9,14 @@ namespace Model
         public string TitleName
         {
             get => titleName;
-            private set => titleName = value;
+            private set
+            {
+                if (value.Length < 1)
+                {
+                    throw new ArgumentException();
+                }
+                titleName = value;
+            }
         }
 
         public Title(string titleName)
