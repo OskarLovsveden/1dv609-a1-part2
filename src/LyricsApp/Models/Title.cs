@@ -4,6 +4,7 @@ namespace Model
 {
     public class Title : ITitle
     {
+        private string titleName;
         public Title(string titleName)
         {
             TitleName = titleName;
@@ -11,8 +12,8 @@ namespace Model
 
         public string TitleName
         {
-            get => throw new NotImplementedException();
-            private set => throw new NotImplementedException();
+            get => titleName;
+            private set => titleName = value;
         }
     }
 }
