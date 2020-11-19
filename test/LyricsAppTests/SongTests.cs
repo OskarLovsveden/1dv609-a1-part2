@@ -39,7 +39,7 @@ namespace LyricsAppTests
             Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
 
             string expected = input;
-            string actual = sut.getArtistName();
+            string actual = sut.getSongTitle();
 
             Assert.Equal(expected, actual);
         }

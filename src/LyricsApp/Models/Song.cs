@@ -23,7 +23,7 @@ namespace Model
 
         public string getSongTitle()
         {
-            throw new System.NotImplementedException();
+            return _title.TitleName;
         }
     }
 }
