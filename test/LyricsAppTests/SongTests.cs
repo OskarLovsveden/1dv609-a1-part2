@@ -24,6 +24,7 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual);
         }
 
+
         [Fact]
         public void GetSongTitle_ShouldReturnSongTitle()
         {
