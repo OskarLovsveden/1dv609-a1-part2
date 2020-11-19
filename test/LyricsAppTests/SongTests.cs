@@ -61,7 +61,9 @@ namespace LyricsAppTests
         }
 
         private Mock<IArtist> GetNewMockArtist() => new Mock<IArtist>();
+
         private Mock<ITitle> GetNewMockTitle() => new Mock<ITitle>();
+
         private Mock<ILyric> GetNewMockLyric() => new Mock<ILyric>();
     }
 }
