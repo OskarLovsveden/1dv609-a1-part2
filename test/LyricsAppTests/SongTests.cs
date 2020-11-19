@@ -25,6 +25,25 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void GetSongTitle_ShouldReturnArtistName()
+        {
+            string input = "Song Title";
+            Mock<IArtist> mockArtist = GetNewMockArtist();
+            Mock<ITitle> mockTitle = GetNewMockTitle();
+            Mock<ILyric> mockLyric = GetNewMockLyric();
+
+
+            mockTitle.Setup(title => title.TitleName).Returns(input);
+
+            Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
+
+            string expected = input;
+            string actual = sut.getArtistName();
+
+            Assert.Equal(expected, actual);
+        }
+
         private Mock<IArtist> GetNewMockArtist() => new Mock<IArtist>();
         private Mock<ITitle> GetNewMockTitle() => new Mock<ITitle>();
         private Mock<ILyric> GetNewMockLyric() => new Mock<ILyric>();
