@@ -14,7 +14,6 @@ namespace LyricsAppTests
             Mock<ITitle> mockTitle = GetNewMockTitle();
             Mock<ILyric> mockLyric = GetNewMockLyric();
 
-
             mockArtist.Setup(artist => artist.Name).Returns(input);
 
             Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
@@ -26,13 +25,12 @@ namespace LyricsAppTests
         }
 
         [Fact]
-        public void GetSongTitle_ShouldReturnArtistName()
+        public void GetSongTitle_ShouldReturnSongTitle()
         {
             string input = "Song Title";
             Mock<IArtist> mockArtist = GetNewMockArtist();
             Mock<ITitle> mockTitle = GetNewMockTitle();
             Mock<ILyric> mockLyric = GetNewMockLyric();
-
 
             mockTitle.Setup(title => title.TitleName).Returns(input);
 
