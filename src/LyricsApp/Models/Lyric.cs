@@ -2,7 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 namespace Model
 {
-    public class Lyric
+    public class Lyric : ILyric
     {
         private string _lyricText;
 
