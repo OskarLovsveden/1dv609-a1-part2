@@ -14,9 +14,9 @@ namespace LyricsAppTests
         }
 
         [Fact]
-        public void SetName_StringLengthOverHundredCharacters_ThrowsArgumentOutOfRangeException()
+        public void SetName_StringLengthOverFiftyCharacters_ThrowsArgumentOutOfRangeException()
         {
-            string input = new string('*', 101);
+            string input = new string('*', 51);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Artist(input));
         }

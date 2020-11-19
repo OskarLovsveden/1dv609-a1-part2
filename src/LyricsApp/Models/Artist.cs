@@ -15,7 +15,7 @@ namespace Model
                     throw new ArgumentException();
                 }
 
-                if (value.Length > 100)
+                if (value.Length > 50)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
