@@ -7,6 +7,13 @@ namespace LyricsAppTests
     public class ArtistTests
     {
         [Fact]
+        public void SetName_EmptyString_ThrowsArgumentException()
+        {
+            string input = "";
+            Assert.Throws<ArgumentException>(() => new Artist(input));
+        }
+
+        [Fact]
         public void GetName_Name_ReturnsTheSetName()
         {
             string input = "Cool guy";
