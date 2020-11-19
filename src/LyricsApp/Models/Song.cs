@@ -18,7 +18,7 @@ namespace Model
 
         public string getSongLyrics()
         {
-            throw new System.NotImplementedException();
+            return _lyric.LyricText;
         }
 
         public string getSongTitle()
