@@ -13,7 +13,7 @@ namespace Model
         }
         public string getArtistName()
         {
-            throw new System.NotImplementedException();
+            return _artist.Name;
         }
 
         public string getSongLyrics()
