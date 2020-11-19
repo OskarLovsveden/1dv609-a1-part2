@@ -14,6 +14,14 @@ namespace LyricsAppTests
         }
 
         [Fact]
+        public void SetName_StringLengthOverHundredCharacters_ThrowsArgumentOutOfRangeException()
+        {
+            string input = new string('A', 101);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Title(input));
+        }
+
+        [Fact]
         public void GetTitleName_Name_ReturnsTheSetName()
         {
             string input = "Song Title";
