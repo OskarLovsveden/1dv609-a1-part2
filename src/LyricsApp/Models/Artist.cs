@@ -13,6 +13,10 @@ namespace Model
 
         public Artist(string name)
         {
+            if (name.Length < 1)
+            {
+                throw new ArgumentException();
+            }
             Name = name;
         }
     }
