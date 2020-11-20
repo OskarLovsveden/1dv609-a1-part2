@@ -2,6 +2,6 @@ namespace Model
 {
     public interface ITitle
     {
-        string TitleName { get; }
+        string Name { get; }
     }
 }

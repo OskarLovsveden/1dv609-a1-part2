@@ -33,7 +33,7 @@ namespace LyricsAppTests
             Mock<ITitle> mockTitle = GetNewMockTitle();
             Mock<ILyric> mockLyric = GetNewMockLyric();
 
-            mockTitle.Setup(title => title.TitleName).Returns(input);
+            mockTitle.Setup(title => title.Name).Returns(input);
 
             Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
 

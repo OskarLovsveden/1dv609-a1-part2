@@ -25,7 +25,7 @@ namespace Model
 
         public string getSongTitle()
         {
-            return _title.TitleName;
+            return _title.Name;
         }
     }
 }

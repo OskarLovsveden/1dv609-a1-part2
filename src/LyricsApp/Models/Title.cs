@@ -4,11 +4,11 @@ namespace Model
 {
     public class Title : ITitle
     {
-        private string titleName;
+        private string _name;
 
-        public string TitleName
+        public string Name
         {
-            get => titleName;
+            get => _name;
             private set
             {
                 if (value.Length < 1)
@@ -21,13 +21,13 @@ namespace Model
                     throw new ArgumentOutOfRangeException();
                 }
 
-                titleName = value;
+                _name = value;
             }
         }
 
-        public Title(string titleName)
+        public Title(string name)
         {
-            TitleName = titleName;
+            Name = name;
         }
 
     }

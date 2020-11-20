@@ -11,7 +11,7 @@ namespace LyricsAppTests
         {
             string input = "15953433";
 
-            TrackID sut = new TrackID(input);
+            Track sut = new Track(input);
 
             string expected = input;
             string actual = sut.ID;

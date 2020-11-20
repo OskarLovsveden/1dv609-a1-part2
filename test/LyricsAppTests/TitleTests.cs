@@ -29,7 +29,7 @@ namespace LyricsAppTests
             Title sut = new Title(input);
 
             string expected = input;
-            string actual = sut.TitleName;
+            string actual = sut.Name;
 
             Assert.Equal(expected, actual);
         }
