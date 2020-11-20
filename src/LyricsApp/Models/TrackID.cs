@@ -5,7 +5,11 @@ namespace Model
     {
         private string _trackID;
 
-        public string ID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ID
+        {
+            get => _trackID;
+            set => _trackID = value;
+        }
 
         public TrackID(string trackID)
         {
