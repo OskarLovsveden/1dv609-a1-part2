@@ -22,7 +22,7 @@ public class FetchTests
         Fetch sut = new Fetch(new HttpClient(mockHandler.Object));
 
         string testUrl = "http://www.test.com/";
-        var response = await sut.GetAsync(testUrl);
+        HttpResponseMessage response = await sut.GetAsync(testUrl);
 
         HttpStatusCode actual = response.StatusCode;
         HttpStatusCode expected = HttpStatusCode.OK;
