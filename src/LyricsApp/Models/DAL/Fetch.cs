@@ -15,7 +15,7 @@ namespace Model.DAL
 
         public Task<HttpResponseMessage> GetAsync(string url)
         {
-            throw new NotImplementedException();
+            return _client.GetAsync(url);
         }
     }
 }
