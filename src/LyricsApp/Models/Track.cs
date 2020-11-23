@@ -1,7 +1,7 @@
 using System;
 namespace Model
 {
-    public class Track
+    public class Track : ITrack
     {
         private string _id;
 

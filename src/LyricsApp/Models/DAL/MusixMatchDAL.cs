@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Config;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace Model.DAL
 {
@@ -36,6 +37,11 @@ namespace Model.DAL
 
             string trackID = (string)responseJson["message"]["body"]["track"]["track_id"];
             return new Track(trackID);
+        }
+
+        public Task<Song> GetSong(string artistName, string songTitle, string trackID)
+        {
+            throw new NotImplementedException();
         }
     }
 }
