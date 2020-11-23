@@ -1,3 +1,5 @@
+using System.Net;
+using CustomException;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Config;
@@ -21,6 +23,11 @@ namespace Model.DAL
             string url = $"{settings.BaseURL}{getLyricURL}?format=jsonp&callback=callback&q_artist={artist.Name}&q_track={title.Name}&apikey={settings.API_KEY}";
 
             HttpResponseMessage responseMessage = await _fetch.GetAsync(url);
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new TrackNotFoundException();
+            }
 
             string response = await responseMessage.Content.ReadAsStringAsync();
             response = response.Replace("callback(", "");

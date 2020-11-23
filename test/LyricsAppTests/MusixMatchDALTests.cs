@@ -5,6 +5,7 @@ using Moq;
 using Model.DAL;
 using Model;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace LyricsAppTests
 {
@@ -35,13 +36,13 @@ namespace LyricsAppTests
 
         [Theory]
         [InlineData("AbcAbcAbc", "AbcAbcAbc")]
-        public void GetTrack_SongInfo_ThrowsOnTrackNotFound(string artistName, string songTitle)
+        public async void GetTrack_SongInfo_ThrowsOnTrackNotFound(string artistName, string songTitle)
         {
             Mock<IFetch> mockFetch = new Mock<IFetch>();
             Mock<IArtist> mockArtist = new Mock<IArtist>();
             Mock<ITitle> mockTitle = new Mock<ITitle>();
 
-            Task<HttpResponseMessage> fakeResponseMessage = GetFakeResponeMessage(GetFakeTrackResponse());
+            Task<HttpResponseMessage> fakeResponseMessage = GetFakeResponeMessageFailed();
 
             mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponseMessage);
             mockArtist.Setup(artist => artist.Name).Returns(artistName);
@@ -49,13 +50,20 @@ namespace LyricsAppTests
 
             MusixMatchDAL sut = new MusixMatchDAL(mockFetch.Object);
 
-            Assert.Throws<TrackNotFoundException>(() => sut.GetTrack(mockArtist.Object, mockTitle.Object).Result);
+
+            await Assert.ThrowsAsync<TrackNotFoundException>(() => sut.GetTrack(mockArtist.Object, mockTitle.Object));
         }
 
         private Task<HttpResponseMessage> GetFakeResponeMessage(string fakeContent)
         {
             HttpContent content = new StringContent(fakeContent);
-            return Task.FromResult(new HttpResponseMessage { Content = content });
+            return Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = content });
+        }
+
+        private Task<HttpResponseMessage> GetFakeResponeMessageFailed()
+        {
+            HttpContent content = new StringContent("fakeContent");
+            return Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.Forbidden, Content = content });
         }
 
         private string GetFakeTrackResponse()
