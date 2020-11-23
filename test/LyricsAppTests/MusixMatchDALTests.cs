@@ -11,23 +11,22 @@ namespace LyricsAppTests
     public class MusixMatchDALTests
     {
         [Theory]
-        [InlineData("ABBA", "Waterloo")]
-        public void GetTrack_SongInfo_ReturnsTrackInstance(string artistName, string songTitle)
+        [InlineData("ABBA", "Waterloo", "86797692")]
+        public void GetTrack_SongInfo_ReturnsTrackInstance(string artistName, string songTitle, string trackID)
         {
             Mock<IFetch> mockFetch = new Mock<IFetch>();
             Mock<IArtist> mockArtist = new Mock<IArtist>();
             Mock<ITitle> mockTitle = new Mock<ITitle>();
 
-            Task<HttpResponseMessage> fakeResponse = GetFakeResponeMessage(GetFakeTrackResponse());
-            // string fakeURL = "http://www.test.com/";
+            Task<HttpResponseMessage> fakeResponseMessage = GetFakeResponeMessage(GetFakeTrackResponse());
 
-            mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponse);
+            mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponseMessage);
             mockArtist.Setup(artist => artist.Name).Returns(artistName);
             mockTitle.Setup(songTitle => songTitle.Name).Returns(songTitle);
 
             MusixMatchDAL sut = new MusixMatchDAL(mockFetch.Object);
 
-            Track expected = new Track("86797692");
+            Track expected = new Track(trackID);
 
             Track actual = sut.GetTrack(mockArtist.Object, mockTitle.Object).Result;
 
