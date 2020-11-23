@@ -13,17 +13,17 @@ namespace Model
             _lyric = lyric;
         }
 
-        public string getArtistName()
+        public string GetArtistName()
         {
             return _artist.Name;
         }
 
-        public string getSongLyrics()
+        public string GetSongLyrics()
         {
             return _lyric.LyricText;
         }
 
-        public string getSongTitle()
+        public string GetSongTitle()
         {
             return _title.Name;
         }

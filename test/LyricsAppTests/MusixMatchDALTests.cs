@@ -6,9 +6,6 @@ using Model.DAL;
 using Model;
 using System.Threading.Tasks;
 using System.Net;
-using System.IO;
-using Newtonsoft.Json;
-using System.Linq;
 
 namespace LyricsAppTests
 {
@@ -16,18 +13,19 @@ namespace LyricsAppTests
     {
         [Theory]
         [InlineData("ABBA", "Waterloo", "86797692")]
-        public void GetTrack_SongInfo_ReturnsTrackInstance(string artistName, string songTitle, string trackID)
+        public async void GetTrack_SongInfo_ReturnsTrackInstance(string artistName, string songTitle, string trackID)
         {
-
             Mock<IArtist> mockArtist = GetMockArtist(artistName);
             Mock<ITitle> mockTitle = GetMockTitle(songTitle);
 
-            MusixMatchDAL sut = GetSystemUnderTest(GetFakeResponeMessageSuccess(GetFakeTrackResponse()));
+            string fakeTrackResponse = GetFakeTrackResponse();
+            Task<HttpResponseMessage> fakeResponse = GetFakeResponseMessageSuccess(fakeTrackResponse);
+            MusixMatchDAL sut = GetSystemUnderTest(fakeResponse);
 
-            Track expected = new Track(trackID);
-            Track actual = sut.GetTrack(mockArtist.Object, mockTitle.Object).Result;
+            string expected = trackID;
+            Track actual = await sut.GetTrack(mockArtist.Object, mockTitle.Object);
 
-            Assert.Equal(expected.ID, actual.ID);
+            Assert.Equal(expected, actual.ID);
         }
 
         [Theory]
@@ -37,7 +35,8 @@ namespace LyricsAppTests
             Mock<IArtist> mockArtist = GetMockArtist(artistName);
             Mock<ITitle> mockTitle = GetMockTitle(songTitle);
 
-            MusixMatchDAL sut = GetSystemUnderTest(GetFakeResponeMessageFailed());
+            Task<HttpResponseMessage> fakeResponse = GetFakeResponseMessageFailed();
+            MusixMatchDAL sut = GetSystemUnderTest(fakeResponse);
 
             await Assert.ThrowsAsync<TrackNotFoundException>(() => sut.GetTrack(mockArtist.Object, mockTitle.Object));
         }
@@ -52,13 +51,15 @@ namespace LyricsAppTests
 
             mockTrack.Setup(track => track.ID).Returns(trackID);
 
-            MusixMatchDAL sut = GetSystemUnderTest(GetFakeResponeMessageSuccess(GetFakeLyricResponse()));
+            string fakeLyricResponse = GetFakeLyricResponse();
+            Task<HttpResponseMessage> fakeResponse = GetFakeResponseMessageSuccess(fakeLyricResponse);
+            MusixMatchDAL sut = GetSystemUnderTest(fakeResponse);
 
             string expected = artistName;
 
             Song actual = await sut.GetSong(artistName, songTitle, trackID);
 
-            Assert.Equal(expected, actual.getArtistName());
+            Assert.Equal(expected, actual.GetArtistName());
         }
 
         private MusixMatchDAL GetSystemUnderTest(Task<HttpResponseMessage> fakeResponseMessage)
@@ -68,13 +69,13 @@ namespace LyricsAppTests
             return new MusixMatchDAL(mockFetch.Object);
         }
 
-        private Task<HttpResponseMessage> GetFakeResponeMessageSuccess(string responseContent)
+        private Task<HttpResponseMessage> GetFakeResponseMessageSuccess(string responseContent)
         {
             HttpContent content = new StringContent(responseContent);
             return Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = content });
         }
 
-        private Task<HttpResponseMessage> GetFakeResponeMessageFailed()
+        private Task<HttpResponseMessage> GetFakeResponseMessageFailed()
         {
             HttpContent content = new StringContent("fakeContent");
             return Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.Forbidden, Content = content });

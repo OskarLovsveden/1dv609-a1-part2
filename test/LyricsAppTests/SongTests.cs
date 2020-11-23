@@ -19,7 +19,7 @@ namespace LyricsAppTests
             Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
 
             string expected = input;
-            string actual = sut.getArtistName();
+            string actual = sut.GetArtistName();
 
             Assert.Equal(expected, actual);
         }
@@ -38,7 +38,7 @@ namespace LyricsAppTests
             Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
 
             string expected = input;
-            string actual = sut.getSongTitle();
+            string actual = sut.GetSongTitle();
 
             Assert.Equal(expected, actual);
         }
@@ -56,7 +56,7 @@ namespace LyricsAppTests
             Song sut = new Song(mockArtist.Object, mockTitle.Object, mockLyric.Object);
 
             string expected = input;
-            string actual = sut.getSongLyrics();
+            string actual = sut.GetSongLyrics();
 
             Assert.Equal(expected, actual);
         }
