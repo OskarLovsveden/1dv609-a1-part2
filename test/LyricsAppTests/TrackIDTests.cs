@@ -11,10 +11,10 @@ namespace LyricsAppTests
         {
             string input = "15953433";
 
-            Track sut = new Track(input);
+            TrackID sut = new TrackID(input);
 
             string expected = input;
-            string actual = sut.ID;
+            string actual = sut.Value;
 
             Assert.Equal(expected, actual);
         }

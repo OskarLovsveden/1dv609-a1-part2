@@ -1,19 +1,19 @@
 using System;
 namespace Model
 {
-    public class Track : ITrack
+    public class TrackID : ITrackID
     {
         private string _id;
 
-        public string ID
+        public string Value
         {
             get => _id;
             private set => _id = value;
         }
 
-        public Track(string id)
+        public TrackID(string id)
         {
-            ID = id;
+            Value = id;
         }
 
     }

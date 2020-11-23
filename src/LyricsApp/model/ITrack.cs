@@ -1,7 +1,7 @@
 namespace Model
 {
-    public interface ITrack
+    public interface ITrackID
     {
-        string ID { get; }
+        string Value { get; }
     }
 }
