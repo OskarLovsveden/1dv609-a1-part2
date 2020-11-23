@@ -9,7 +9,6 @@ using Xunit;
 
 public class FetchTests
 {
-
     [Fact]
     public async Task GetAsync_GetAsyncRequest_ReturnsResponse()
     {

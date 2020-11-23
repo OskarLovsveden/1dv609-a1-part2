@@ -1,4 +1,4 @@
-using System;
+using CustomException;
 using Xunit;
 using System.Net.Http;
 using Moq;
@@ -31,6 +31,25 @@ namespace LyricsAppTests
             Track actual = sut.GetTrack(mockArtist.Object, mockTitle.Object).Result;
 
             Assert.Equal(expected.ID, actual.ID);
+        }
+
+        [Theory]
+        [InlineData("AbcAbcAbc", "AbcAbcAbc")]
+        public void GetTrack_SongInfo_ThrowsOnTrackNotFound(string artistName, string songTitle)
+        {
+            Mock<IFetch> mockFetch = new Mock<IFetch>();
+            Mock<IArtist> mockArtist = new Mock<IArtist>();
+            Mock<ITitle> mockTitle = new Mock<ITitle>();
+
+            Task<HttpResponseMessage> fakeResponseMessage = GetFakeResponeMessage(GetFakeTrackResponse());
+
+            mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponseMessage);
+            mockArtist.Setup(artist => artist.Name).Returns(artistName);
+            mockTitle.Setup(songTitle => songTitle.Name).Returns(songTitle);
+
+            MusixMatchDAL sut = new MusixMatchDAL(mockFetch.Object);
+
+            Assert.Throws<TrackNotFoundException>(() => sut.GetTrack(mockArtist.Object, mockTitle.Object).Result);
         }
 
         private Task<HttpResponseMessage> GetFakeResponeMessage(string fakeContent)
