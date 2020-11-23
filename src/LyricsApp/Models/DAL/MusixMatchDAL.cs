@@ -10,7 +10,8 @@ namespace Model.DAL
 {
     public class MusixMatchDAL
     {
-        private readonly string getLyricURL = "matcher.lyrics.get";
+        private readonly string getTrackURL = "matcher.track.get";
+        private readonly string getLyricURL = "track.lyrics.get";
         private Settings settings = new Settings();
         private IFetch _fetch;
 
@@ -21,7 +22,7 @@ namespace Model.DAL
 
         public async Task<Track> GetTrack(IArtist artist, ITitle title)
         {
-            string url = $"{settings.BaseURL}{getLyricURL}?format=jsonp&callback=callback&q_artist={artist.Name}&q_track={title.Name}&apikey={settings.API_KEY}";
+            string url = $"{settings.BaseURL}{getTrackURL}?format=jsonp&callback=callback&q_artist={artist.Name}&q_track={title.Name}&apikey={settings.API_KEY}";
 
             HttpResponseMessage responseMessage = await _fetch.GetAsync(url);
 
@@ -39,9 +40,24 @@ namespace Model.DAL
             return new Track(trackID);
         }
 
-        public Task<Song> GetSong(string artistName, string songTitle, string trackID)
+        public async Task<Song> GetSong(string artistName, string songTitle, string trackID)
         {
-            throw new NotImplementedException();
+            string url = $"{settings.BaseURL}{getLyricURL}?format=jsonp&callback=callback&track_id={trackID}&apikey={settings.API_KEY}";
+
+            HttpResponseMessage responseMessage = await _fetch.GetAsync(url);
+
+            string response = await responseMessage.Content.ReadAsStringAsync();
+            response = response.Replace("callback(", "");
+            response = response.Replace(");", "");
+            JObject responseJson = JObject.Parse(response);
+
+            string lyricsText = (string)responseJson["message"]["body"]["lyrics"]["lyrics_body"];
+
+            Artist artist = new Artist(artistName);
+            Title title = new Title(songTitle);
+            Lyric lyrics = new Lyric(lyricsText);
+
+            return new Song(artist, title, lyrics);
         }
     }
 }

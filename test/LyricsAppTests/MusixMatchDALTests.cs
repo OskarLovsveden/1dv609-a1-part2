@@ -6,6 +6,9 @@ using Model.DAL;
 using Model;
 using System.Threading.Tasks;
 using System.Net;
+using System.IO;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace LyricsAppTests
 {
@@ -41,7 +44,7 @@ namespace LyricsAppTests
 
         [Theory]
         [InlineData("ABBA", "Waterloo", "86797692")]
-        public void GetSong_Track_ReturnsSongInstance(string artistName, string songTitle, string trackID)
+        public async void GetSong_Track_ReturnsSongInstance(string artistName, string songTitle, string trackID)
         {
             Mock<ITrack> mockTrack = new Mock<ITrack>();
             Mock<IArtist> mockArtist = GetMockArtist(artistName);
@@ -53,9 +56,9 @@ namespace LyricsAppTests
 
             string expected = artistName;
 
-            string actual = sut.GetSong(artistName, songTitle, trackID).Result.getArtistName();
+            Song actual = await sut.GetSong(artistName, songTitle, trackID);
 
-            Assert.Equal(expected, actual);
+            Assert.Equal(expected, actual.getArtistName());
         }
 
         private MusixMatchDAL GetSystemUnderTest(Task<HttpResponseMessage> fakeResponseMessage)
@@ -80,20 +83,20 @@ namespace LyricsAppTests
         private string GetFakeLyricResponse()
         {
             return @"callback({
-                    'message':{
-                        'header':{
-                            'status_code':200,
-                            'execute_time':0.014976024627686
+                    ""message"":{
+                        ""header"":{
+                            ""status_code"":200,
+                            ""execute_time"":0.014976024627686
                         },
-                        'body':{
-                            'lyrics':{
-                                'lyrics_id':19832103,
-                                'explicit':0,
-                                'lyrics_body':'My, my\nAt Waterloo, Napoleon did surrender\nOh yeah\nAnd I have met my destiny in quite a similar way\nThe history book on the shelf\nIs always repeating itself\n\nWaterloo\nI was defeated, you won the war\nWaterloo\nPromise to love you for ever more\n\nWaterloo\nCouldn't escape if I wanted to\nWaterloo\nKnowing my fate is to be with you\n\nOh, oh, oh, oh, Waterloo\n...\n\n******* This Lyrics is NOT for Commercial use *******\n(1409620829342)',
-                                'script_tracking_url':'https:\/\/tracking.musixmatch.com\/t1.0\/m_js\/e_1\/sn_0\/l_19832103\/su_0\/rs_0\/tr_3vUCALb9uFOBVHWsGBgdovat7lPEsFC4j25hZ6hGcDjwY3p3hn4AxbHuxfFSGLM_xPgO2qmVODICvE7mYYqa4ul_xbnXLQuz2q-Wiu77LyHwPZnBbZElpkCOITvrMq-JNg1UjeCZewQfIUmuzgmg5XdPQ3AOJtnwZ9ckz5Vub0ozTXch2_kjb9wmu6XM9VdVb3gn1vDj9ksVCb9eF9O6KriXNKOCBsqHWZ5_EV94ZL2i9-UFLh89w2bVhvIcoxhnAOwVOroHXFlla7nteIKKXHAce2fLwsekMjPT1s2Xnzh-NWRMjU74D2j-z0CRqFy-Mx8x2J7ticdWvvxT9E7vJ90d2PY6UcwwtRLNY7aqsHgx0K073JhBpt9zt2Gx3tozoUTDtyu6EkfTAN5VkjK9bck_sJ7P-q-l0lE0wTu6A_EgQuA88Ea7Aw\/',
-                                'pixel_tracking_url':'https:\/\/tracking.musixmatch.com\/t1.0\/m_img\/e_1\/sn_0\/l_19832103\/su_0\/rs_0\/tr_3vUCAISM2EKhaUJqA1y3R0y8-VtabIdhdOMmSf5BLyXgn8UDzZ-hsNRNJF5ON1HJzzrVXOwv9OxVZmjjxyWmddIjJoUmbsPb_hZg-KHYNPrdjd8cnYzMNnIuoKkGwZ-6RFTKmGd3E5d54keFopYkLk_3iUdSW0_XRafhBaKuF-6nshwJTTmRkvD-ox_Th8cTq7lixer1fuZbdpopzIznVLPyUab_fDbtHiTniw58dkWyTU__9UJcpfSV2yFz3Xd-vuF2cugKkldS977eP0tLQB0i6Ii4r6MPggAbNl_01yU8xtDrbqeXdwEIL-XnGDfFjkPptZQsOlaj_nTXDwAcNbevWoLYJzSWKKoCJbBl-hD3x1gcPeLW9_xE_k-sviKIiAJ8NhrO3jfzMVQ2AgnkDjiW7PzvPzWujiUowBpz6yZx7DbeajWBfQ\/',
-                                'lyrics_copyright':'Lyrics powered by www.musixmatch.com. This Lyrics is NOT for Commercial use and only 30% of the lyrics are returned.',
-                                'updated_time':'2020-11-22T13:15:25Z'
+                        ""body"":{
+                            ""lyrics"":{
+                                ""lyrics_id"":19832103,
+                                ""explicit"":0,
+                                ""lyrics_body"":""My, my\nAt Waterloo, Napoleon did surrender\nOh yeah\nAnd I have met my destiny in quite a similar way\nThe history book on the shelf\nIs always repeating itself\n\nWaterloo\nI was defeated, you won the war\nWaterloo\nPromise to love you for ever more\n\nWaterloo\nCouldn't escape if I wanted to\nWaterloo\nKnowing my fate is to be with you\n\nOh, oh, oh, oh, Waterloo\n...\n\n******* This Lyrics is NOT for Commercial use *******\n(1409620829342)"",
+                                ""script_tracking_url"":""https:\/\/tracking.musixmatch.com\/t1.0\/m_js\/e_1\/sn_0\/l_19832103\/su_0\/rs_0\/tr_3vUCALb9uFOBVHWsGBgdovat7lPEsFC4j25hZ6hGcDjwY3p3hn4AxbHuxfFSGLM_xPgO2qmVODICvE7mYYqa4ul_xbnXLQuz2q-Wiu77LyHwPZnBbZElpkCOITvrMq-JNg1UjeCZewQfIUmuzgmg5XdPQ3AOJtnwZ9ckz5Vub0ozTXch2_kjb9wmu6XM9VdVb3gn1vDj9ksVCb9eF9O6KriXNKOCBsqHWZ5_EV94ZL2i9-UFLh89w2bVhvIcoxhnAOwVOroHXFlla7nteIKKXHAce2fLwsekMjPT1s2Xnzh-NWRMjU74D2j-z0CRqFy-Mx8x2J7ticdWvvxT9E7vJ90d2PY6UcwwtRLNY7aqsHgx0K073JhBpt9zt2Gx3tozoUTDtyu6EkfTAN5VkjK9bck_sJ7P-q-l0lE0wTu6A_EgQuA88Ea7Aw\/"",
+                                ""pixel_tracking_url"":""https:\/\/tracking.musixmatch.com\/t1.0\/m_img\/e_1\/sn_0\/l_19832103\/su_0\/rs_0\/tr_3vUCAISM2EKhaUJqA1y3R0y8-VtabIdhdOMmSf5BLyXgn8UDzZ-hsNRNJF5ON1HJzzrVXOwv9OxVZmjjxyWmddIjJoUmbsPb_hZg-KHYNPrdjd8cnYzMNnIuoKkGwZ-6RFTKmGd3E5d54keFopYkLk_3iUdSW0_XRafhBaKuF-6nshwJTTmRkvD-ox_Th8cTq7lixer1fuZbdpopzIznVLPyUab_fDbtHiTniw58dkWyTU__9UJcpfSV2yFz3Xd-vuF2cugKkldS977eP0tLQB0i6Ii4r6MPggAbNl_01yU8xtDrbqeXdwEIL-XnGDfFjkPptZQsOlaj_nTXDwAcNbevWoLYJzSWKKoCJbBl-hD3x1gcPeLW9_xE_k-sviKIiAJ8NhrO3jfzMVQ2AgnkDjiW7PzvPzWujiUowBpz6yZx7DbeajWBfQ\/"",
+                                ""lyrics_copyright"":""Lyrics powered by www.musixmatch.com. This Lyrics is NOT for Commercial use and only 30% of the lyrics are returned."",
+                                ""updated_time"":""2020-11-22T13:15:25Z""
                             }
                         }
                     }
