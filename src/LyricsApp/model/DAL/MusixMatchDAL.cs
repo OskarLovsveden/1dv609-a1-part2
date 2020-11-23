@@ -46,6 +46,11 @@ namespace Model.DAL
 
             HttpResponseMessage responseMessage = await _fetch.GetAsync(url);
 
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                throw new SongNotFoundException();
+            }
+
             string response = await responseMessage.Content.ReadAsStringAsync();
             response = response.Replace("callback(", "");
             response = response.Replace(");", "");
