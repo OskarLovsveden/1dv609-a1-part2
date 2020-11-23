@@ -62,6 +62,16 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual.GetArtistName());
         }
 
+        [Theory]
+        [InlineData("12415125124", "(/)(/)(/)(/))", "*^*^*^```")]
+        public async void GetSong_SongInfo_ThrowsOnSongNotFound(string artistName, string songTitle, string trackID)
+        {
+            Task<HttpResponseMessage> fakeResponse = GetFakeResponseMessageFailed();
+            MusixMatchDAL sut = GetSystemUnderTest(fakeResponse);
+
+            await Assert.ThrowsAsync<SongNotFoundException>(() => sut.GetSong(artistName, songTitle, trackID));
+        }
+
         private MusixMatchDAL GetSystemUnderTest(Task<HttpResponseMessage> fakeResponseMessage)
         {
             Mock<IFetch> mockFetch = new Mock<IFetch>();
