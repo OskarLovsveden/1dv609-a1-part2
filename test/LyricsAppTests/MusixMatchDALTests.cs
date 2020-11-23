@@ -15,20 +15,13 @@ namespace LyricsAppTests
         [InlineData("ABBA", "Waterloo", "86797692")]
         public void GetTrack_SongInfo_ReturnsTrackInstance(string artistName, string songTitle, string trackID)
         {
-            Mock<IFetch> mockFetch = new Mock<IFetch>();
-            Mock<IArtist> mockArtist = new Mock<IArtist>();
-            Mock<ITitle> mockTitle = new Mock<ITitle>();
 
-            Task<HttpResponseMessage> fakeResponseMessage = GetFakeResponeMessage(GetFakeTrackResponse());
+            Mock<IArtist> mockArtist = GetMockArtist(artistName);
+            Mock<ITitle> mockTitle = GetMockTitle(songTitle);
 
-            mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponseMessage);
-            mockArtist.Setup(artist => artist.Name).Returns(artistName);
-            mockTitle.Setup(songTitle => songTitle.Name).Returns(songTitle);
-
-            MusixMatchDAL sut = new MusixMatchDAL(mockFetch.Object);
+            MusixMatchDAL sut = GetSystemUnderTest(GetFakeResponeMessageSuccess());
 
             Track expected = new Track(trackID);
-
             Track actual = sut.GetTrack(mockArtist.Object, mockTitle.Object).Result;
 
             Assert.Equal(expected.ID, actual.ID);
@@ -38,25 +31,24 @@ namespace LyricsAppTests
         [InlineData("AbcAbcAbc", "AbcAbcAbc")]
         public async void GetTrack_SongInfo_ThrowsOnTrackNotFound(string artistName, string songTitle)
         {
-            Mock<IFetch> mockFetch = new Mock<IFetch>();
-            Mock<IArtist> mockArtist = new Mock<IArtist>();
-            Mock<ITitle> mockTitle = new Mock<ITitle>();
+            Mock<IArtist> mockArtist = GetMockArtist(artistName);
+            Mock<ITitle> mockTitle = GetMockTitle(songTitle);
 
-            Task<HttpResponseMessage> fakeResponseMessage = GetFakeResponeMessageFailed();
-
-            mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponseMessage);
-            mockArtist.Setup(artist => artist.Name).Returns(artistName);
-            mockTitle.Setup(songTitle => songTitle.Name).Returns(songTitle);
-
-            MusixMatchDAL sut = new MusixMatchDAL(mockFetch.Object);
-
+            MusixMatchDAL sut = GetSystemUnderTest(GetFakeResponeMessageFailed());
 
             await Assert.ThrowsAsync<TrackNotFoundException>(() => sut.GetTrack(mockArtist.Object, mockTitle.Object));
         }
 
-        private Task<HttpResponseMessage> GetFakeResponeMessage(string fakeContent)
+        private MusixMatchDAL GetSystemUnderTest(Task<HttpResponseMessage> fakeResponseMessage)
         {
-            HttpContent content = new StringContent(fakeContent);
+            Mock<IFetch> mockFetch = new Mock<IFetch>();
+            mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponseMessage);
+            return new MusixMatchDAL(mockFetch.Object);
+        }
+
+        private Task<HttpResponseMessage> GetFakeResponeMessageSuccess()
+        {
+            HttpContent content = new StringContent(GetFakeTrackResponse());
             return Task.FromResult(new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = content });
         }
 
@@ -115,6 +107,21 @@ namespace LyricsAppTests
                     }
                 }
             });";
+        }
+
+        private Mock<IArtist> GetMockArtist(string name)
+        {
+            Mock<IArtist> mockArtist = new Mock<IArtist>();
+            mockArtist.Setup(artist => artist.Name).Returns(name);
+
+            return mockArtist;
+        }
+        private Mock<ITitle> GetMockTitle(string name)
+        {
+            Mock<ITitle> mockTitle = new Mock<ITitle>();
+            mockTitle.Setup(songTitle => songTitle.Name).Returns(name);
+
+            return mockTitle;
         }
     }
 }
