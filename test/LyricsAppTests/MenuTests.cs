@@ -65,7 +65,7 @@ namespace LyricsAppTests
         [Fact]
         public void PromptArtistName_ShouldCallWrite()
         {
-            string input = "ABBA";
+            string input = ">";
 
             Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
             Menu sut = GetSystemUnderTest(mockConsole);

@@ -29,6 +29,7 @@ namespace View
         public IArtist PromptArtistName()
         {
             _consoleWrapper.WriteLine("ABBA");
+            _consoleWrapper.Write(">");
             return new Artist("ABBA");
         }
     }
