@@ -75,6 +75,17 @@ namespace LyricsAppTests
             mockConsole.Verify(c => c.Write(input));
         }
 
+        [Fact]
+        public void PromptArtistName_ShouldCallReadLine()
+        {
+            Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
+            Menu sut = GetSystemUnderTest(mockConsole);
+
+            sut.PromptArtistName();
+
+            mockConsole.Verify(c => c.ReadLine());
+        }
+
 
         public string GetFakeMainMenuItems()
         {
