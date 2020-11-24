@@ -86,7 +86,6 @@ namespace LyricsAppTests
             mockConsole.Verify(c => c.ReadLine());
         }
 
-
         public string GetFakeMainMenuItems()
         {
             return "1: Find Lyric\n2: Quit";
