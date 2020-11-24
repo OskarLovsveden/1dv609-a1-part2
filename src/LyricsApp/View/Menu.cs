@@ -24,9 +24,9 @@ namespace View
             _consoleWrapper.WriteLine(mainMenuItems);
         }
 
-        public void GetUserInput()
+        public string GetUserInput()
         {
-            throw new NotImplementedException();
+            return _consoleWrapper.ReadLine();
         }
     }
 }
