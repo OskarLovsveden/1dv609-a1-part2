@@ -30,8 +30,8 @@ namespace View
         {
             _consoleWrapper.WriteLine("ABBA");
             _consoleWrapper.Write(">");
-            _consoleWrapper.ReadLine();
-            return new Artist("ABBA");
+            string artistName = _consoleWrapper.ReadLine();
+            return new Artist(artistName);
         }
     }
 }

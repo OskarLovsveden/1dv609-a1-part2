@@ -56,6 +56,8 @@ namespace LyricsAppTests
             string input = "ABBA";
 
             Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
+            mockConsole.Setup(c => c.ReadLine()).Returns("input");
+
             Menu sut = GetSystemUnderTest(mockConsole);
 
             sut.PromptArtistName();
@@ -69,6 +71,8 @@ namespace LyricsAppTests
             string input = ">";
 
             Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
+            mockConsole.Setup(c => c.ReadLine()).Returns("input");
+
             Menu sut = GetSystemUnderTest(mockConsole);
 
             sut.PromptArtistName();
@@ -80,6 +84,7 @@ namespace LyricsAppTests
         public void PromptArtistName_ShouldCallReadLine()
         {
             Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
+            mockConsole.Setup(c => c.ReadLine()).Returns("input");
             Menu sut = GetSystemUnderTest(mockConsole);
 
             sut.PromptArtistName();
