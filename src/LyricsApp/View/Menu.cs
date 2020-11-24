@@ -9,6 +9,7 @@ namespace View
     {
         private IConsoleWrapper _consoleWrapper;
         private List<string> _menuItems = new List<string> { "Find Lyric", "Quit" };
+        private string _promptArtistMessage = "Enter Artist Name";
         public Menu(IConsoleWrapper consoleWrapper)
         {
             _consoleWrapper = consoleWrapper;
@@ -28,7 +29,7 @@ namespace View
 
         public IArtist PromptArtistName()
         {
-            _consoleWrapper.WriteLine("ABBA");
+            _consoleWrapper.WriteLine(_promptArtistMessage);
             _consoleWrapper.Write(">");
             string artistName = _consoleWrapper.ReadLine();
             return new Artist(artistName);

@@ -3,6 +3,8 @@ using Moq;
 using Model;
 using View;
 using View.utils;
+using System;
+using System.Linq.Expressions;
 
 namespace LyricsAppTests
 {
@@ -39,8 +41,7 @@ namespace LyricsAppTests
         {
             Mock<IArtist> mockArtist = new Mock<IArtist>();
             mockArtist.Setup(a => a.Name).Returns(input);
-            Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
-            mockConsole.Setup(c => c.ReadLine()).Returns(input);
+            Mock<IConsoleWrapper> mockConsole = GetConsoleMockWithReadLine(input);
 
             Menu sut = GetSystemUnderTest(mockConsole);
 
@@ -53,38 +54,31 @@ namespace LyricsAppTests
         [Fact]
         public void PromptArtistName_ShouldCallWriteLine()
         {
-            string input = "ABBA";
-
-            Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
-            mockConsole.Setup(c => c.ReadLine()).Returns("input");
+            Mock<IConsoleWrapper> mockConsole = GetConsoleMockWithReadLine();
 
             Menu sut = GetSystemUnderTest(mockConsole);
 
             sut.PromptArtistName();
 
-            mockConsole.Verify(c => c.WriteLine(input));
+            mockConsole.Verify(c => c.WriteLine(It.IsAny<string>()));
         }
 
         [Fact]
         public void PromptArtistName_ShouldCallWrite()
         {
-            string input = ">";
-
-            Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
-            mockConsole.Setup(c => c.ReadLine()).Returns("input");
-
+            Mock<IConsoleWrapper> mockConsole = GetConsoleMockWithReadLine();
             Menu sut = GetSystemUnderTest(mockConsole);
 
             sut.PromptArtistName();
 
-            mockConsole.Verify(c => c.Write(input));
+
+            mockConsole.Verify(c => c.Write(It.IsAny<string>()));
         }
 
         [Fact]
         public void PromptArtistName_ShouldCallReadLine()
         {
-            Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
-            mockConsole.Setup(c => c.ReadLine()).Returns("input");
+            Mock<IConsoleWrapper> mockConsole = GetConsoleMockWithReadLine();
             Menu sut = GetSystemUnderTest(mockConsole);
 
             sut.PromptArtistName();
@@ -101,6 +95,13 @@ namespace LyricsAppTests
         private Menu GetSystemUnderTest(Mock<IConsoleWrapper> console)
         {
             return new Menu(console.Object);
+        }
+
+        private Mock<IConsoleWrapper> GetConsoleMockWithReadLine(string input = "input")
+        {
+            Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
+            mockConsole.Setup(c => c.ReadLine()).Returns(input);
+            return mockConsole;
         }
 
         private Mock<IConsoleWrapper> GetConsoleMock()
