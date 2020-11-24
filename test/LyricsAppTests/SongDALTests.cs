@@ -56,7 +56,7 @@ namespace LyricsAppTests
             Mock<IFetch> mockFetch = new Mock<IFetch>();
             Mock<ITrackDAL> mockTrackDAL = new Mock<ITrackDAL>();
 
-            mockTrackDAL.Setup(track => track.GetTrack(artist.Object, title.Object)).Returns(Task.FromResult(new TrackID(trackID.Object.Value)));
+            mockTrackDAL.Setup(track => track.GetTrack(artist.Object, title.Object)).Returns(Task.FromResult(trackID.Object));
             mockFetch.Setup(fetch => fetch.GetAsync(It.IsAny<string>())).Returns(fakeResponseMessage);
 
             return new SongDAL(mockFetch.Object, mockTrackDAL.Object);

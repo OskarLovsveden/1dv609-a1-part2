@@ -1,9 +1,7 @@
-using System;
 using Xunit;
 using Moq;
 using View;
 using View.utils;
-using System.IO;
 
 namespace LyricsAppTests
 {

@@ -18,7 +18,7 @@ namespace Model.DAL
         }
 
 
-        public async Task<TrackID> GetTrack(IArtist artist, ITitle title)
+        public async Task<ITrackID> GetTrack(IArtist artist, ITitle title)
         {
             string url = $"{settings.BaseURL}{getTrackURL}?format=jsonp&callback=callback&q_artist={artist.Name}&q_track={title.Name}&apikey={settings.API_KEY}";
 

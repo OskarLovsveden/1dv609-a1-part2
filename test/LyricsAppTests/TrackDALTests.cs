@@ -22,7 +22,7 @@ namespace LyricsAppTests
             Task<HttpResponseMessage> fakeResponse = GetFakeResponseMessageSuccess(fakeTrackResponse);
 
             TrackDAL sut = GetSystemUnderTest(fakeResponse);
-            TrackID track = await sut.GetTrack(mockArtist.Object, mockTitle.Object);
+            ITrackID track = await sut.GetTrack(mockArtist.Object, mockTitle.Object);
 
             string expected = trackID;
             string actual = track.Value;

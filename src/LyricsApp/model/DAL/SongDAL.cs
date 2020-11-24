@@ -24,7 +24,7 @@ namespace Model.DAL
 
         public async Task<Song> GetSong(IArtist artist, ITitle songTitle)
         {
-            TrackID trackID = await _trackDAL.GetTrack(artist, songTitle);
+            ITrackID trackID = await _trackDAL.GetTrack(artist, songTitle);
             string url = $"{settings.BaseURL}{getLyricURL}?format=jsonp&callback=callback&track_id={trackID}&apikey={settings.API_KEY}";
 
             HttpResponseMessage responseMessage = await _fetch.GetAsync(url);
