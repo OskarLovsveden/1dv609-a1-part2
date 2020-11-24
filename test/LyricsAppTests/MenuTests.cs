@@ -10,7 +10,7 @@ namespace LyricsAppTests
         [Fact]
         public void ShowMainMenu_DisplaysMenuItems()
         {
-            string fakeMenuItems = GetFakeMenuItems();
+            string fakeMenuItems = GetFakeMainMenuItems();
             Mock<IConsoleWrapper> mockConsole = new Mock<IConsoleWrapper>();
 
             Menu sut = new Menu(mockConsole.Object);
@@ -19,7 +19,18 @@ namespace LyricsAppTests
             mockConsole.Verify(c => c.WriteLine(fakeMenuItems));
         }
 
-        public string GetFakeMenuItems()
+        [Fact]
+        public void ShowPromptSongName_DisplaysMenuItems()
+        {
+            Mock<IConsoleWrapper> mockConsole = new Mock<IConsoleWrapper>();
+
+            Menu sut = new Menu(mockConsole.Object);
+            sut.GetUserInput();
+
+            mockConsole.Verify(c => c.ReadLine());
+        }
+
+        public string GetFakeMainMenuItems()
         {
             return "1: Find Lyric\n2: Quit\n";
         }
