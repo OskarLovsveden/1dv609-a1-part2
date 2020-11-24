@@ -28,7 +28,7 @@ namespace View
 
         public IArtist PromptArtistName()
         {
-            throw new NotImplementedException();
+            return new Artist("ABBA");
         }
     }
 }

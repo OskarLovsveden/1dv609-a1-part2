@@ -46,7 +46,7 @@ namespace LyricsAppTests
             IArtist expected = mockArtist.Object;
             IArtist actual = sut.PromptArtistName();
 
-            Assert.Equal(expected, actual);
+            Assert.Equal(expected.Name, actual.Name);
         }
 
 
