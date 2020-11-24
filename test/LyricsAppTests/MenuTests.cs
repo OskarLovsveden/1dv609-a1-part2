@@ -15,27 +15,15 @@ namespace LyricsAppTests
             string fakeMenuItems = GetFakeMenuItems();
             Mock<IConsoleWrapper> mockConsole = new Mock<IConsoleWrapper>();
 
-            mockConsole.Setup(console => console.WriteLine(fakeMenuItems)).Callback(() => { Console.WriteLine(fakeMenuItems); });
-
             Menu sut = new Menu(mockConsole.Object);
+            sut.ShowMainMenu();
 
-
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                sut.ShowMainMenu();
-
-                string expected = fakeMenuItems;
-                string actual = sw.ToString();
-
-                Assert.Equal(expected, actual);
-            }
+            mockConsole.Verify(c => c.WriteLine(fakeMenuItems));
         }
-
 
         public string GetFakeMenuItems()
         {
-            return "1: Find Lyric\n2: Quit";
+            return "1: Find Lyric\n2: Quit\n";
         }
     }
 }

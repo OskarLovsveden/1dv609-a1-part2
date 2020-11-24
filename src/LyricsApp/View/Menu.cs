@@ -14,7 +14,14 @@ namespace View
 
         public void ShowMainMenu()
         {
-            throw new NotImplementedException();
+            string mainMenuItems = "";
+
+            for (int i = 0; i < _menuItems.Count; i++)
+            {
+                mainMenuItems += $"{i + 1}: {_menuItems[i]}\n";
+            }
+
+            _consoleWrapper.WriteLine(mainMenuItems);
         }
     }
 }
