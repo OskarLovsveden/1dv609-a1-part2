@@ -9,7 +9,9 @@ namespace View.utils
         }
         public string PromptQuestion(string question)
         {
-            throw new System.NotImplementedException();
+            _console.WriteLine(question);
+            _console.Write(">");
+            return _console.ReadLine();
         }
     }
 }
