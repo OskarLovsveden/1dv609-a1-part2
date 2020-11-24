@@ -32,10 +32,11 @@ namespace LyricsAppTests
             mockConsole.Verify(c => c.ReadLine());
         }
 
-        [Fact]
-        public void PromptArtistName_ReturnsNewIArtist()
+        [Theory]
+        [InlineData("ABBA")]
+        [InlineData("Metallica")]
+        public void PromptArtistName_ReturnsNewIArtist(string input)
         {
-            string input = "ABBA";
             Mock<IArtist> mockArtist = new Mock<IArtist>();
             mockArtist.Setup(a => a.Name).Returns(input);
             Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
