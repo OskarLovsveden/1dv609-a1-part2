@@ -26,5 +26,10 @@ namespace View
             string artistName = _prompt.PromptQuestion(_promptArtistMessage);
             return new Artist(artistName);
         }
+
+        public ITitle GetSongTitle()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

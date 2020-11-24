@@ -38,6 +38,21 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData("Waterloo")]
+        [InlineData("Nothing else matters")]
+        public void PromptSongTitle_ReturnsNewITitle(string input)
+        {
+            Mock<IPrompt> mockPrompt = GetMockPrompt();
+            mockPrompt.Setup(p => p.PromptQuestion(It.IsAny<string>())).Returns(input);
+            Menu sut = GetSystemUnderTest(mockPrompt);
+
+            string expected = input;
+            string actual = sut.GetSongTitle().Name;
+
+            Assert.Equal(expected, actual);
+        }
+
         private Menu GetSystemUnderTest(Mock<IPrompt> console)
         {
             return new Menu(console.Object);
