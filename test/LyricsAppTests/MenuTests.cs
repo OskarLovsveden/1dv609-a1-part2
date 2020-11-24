@@ -12,10 +12,8 @@ namespace LyricsAppTests
         public void ShowMainMenu_DisplaysMenuItems()
         {
             string input = "test";
-            Mock<IPrompt> mockPrompt = GetMockPrompt();
-            mockPrompt.Setup(p => p.PromptQuestion(It.IsAny<string>())).Returns(input);
 
-            Menu sut = GetSystemUnderTest(mockPrompt);
+            Menu sut = GetSystemUnderTest(input);
 
             string expected = input;
             string actual = sut.ShowMainMenuGetUserSelection();
@@ -28,9 +26,7 @@ namespace LyricsAppTests
         [InlineData("Metallica")]
         public void PromptArtistName_ReturnsNewIArtist(string input)
         {
-            Mock<IPrompt> mockPrompt = GetMockPrompt();
-            mockPrompt.Setup(p => p.PromptQuestion(It.IsAny<string>())).Returns(input);
-            Menu sut = GetSystemUnderTest(mockPrompt);
+            Menu sut = GetSystemUnderTest(input);
 
             string expected = input;
             string actual = sut.GetArtist().Name;
@@ -43,9 +39,7 @@ namespace LyricsAppTests
         [InlineData("Nothing else matters")]
         public void PromptSongTitle_ReturnsNewITitle(string input)
         {
-            Mock<IPrompt> mockPrompt = GetMockPrompt();
-            mockPrompt.Setup(p => p.PromptQuestion(It.IsAny<string>())).Returns(input);
-            Menu sut = GetSystemUnderTest(mockPrompt);
+            Menu sut = GetSystemUnderTest(input);
 
             string expected = input;
             string actual = sut.GetSongTitle().Name;
@@ -53,14 +47,11 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual);
         }
 
-        private Menu GetSystemUnderTest(Mock<IPrompt> console)
+        private Menu GetSystemUnderTest(string input)
         {
-            return new Menu(console.Object);
-        }
-
-        private Mock<IPrompt> GetMockPrompt()
-        {
-            return new Mock<IPrompt>();
+            Mock<IPrompt> mockPrompt = new Mock<IPrompt>();
+            mockPrompt.Setup(p => p.PromptQuestion(It.IsAny<string>())).Returns(input);
+            return new Menu(mockPrompt.Object);
         }
     }
 }
