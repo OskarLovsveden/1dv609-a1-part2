@@ -1,5 +1,6 @@
 using Xunit;
 using Moq;
+using Model;
 using View;
 using View.utils;
 
@@ -30,6 +31,24 @@ namespace LyricsAppTests
 
             mockConsole.Verify(c => c.ReadLine());
         }
+
+        [Fact]
+        public void PromptArtistName_ReturnsNewIArtist()
+        {
+            string input = "ABBA";
+            Mock<IArtist> mockArtist = new Mock<IArtist>();
+            mockArtist.Setup(a => a.Name).Returns(input);
+            Mock<IConsoleWrapper> mockConsole = GetConsoleMock();
+            mockConsole.Setup(c => c.ReadLine()).Returns(input);
+
+            Menu sut = GetSystemUnderTest(mockConsole);
+
+            IArtist expected = mockArtist.Object;
+            IArtist actual = sut.PromptArtistName();
+
+            Assert.Equal(expected, actual);
+        }
+
 
         public string GetFakeMainMenuItems()
         {

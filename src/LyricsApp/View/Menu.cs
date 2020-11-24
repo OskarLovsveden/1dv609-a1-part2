@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Model;
 using View.utils;
 namespace View
 {
@@ -23,6 +24,11 @@ namespace View
         public string GetUserInput()
         {
             return _consoleWrapper.ReadLine();
+        }
+
+        public IArtist PromptArtistName()
+        {
+            throw new NotImplementedException();
         }
     }
 }
