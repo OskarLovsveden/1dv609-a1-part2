@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using View.utils;
 namespace View
 {
@@ -14,14 +15,9 @@ namespace View
 
         public void ShowMainMenu()
         {
-            string mainMenuItems = "";
+            string test = String.Join("\n", (_menuItems.Select((item, index) => $"{index + 1}: {item}")));
 
-            for (int i = 0; i < _menuItems.Count; i++)
-            {
-                mainMenuItems += $"{i + 1}: {_menuItems[i]}\n";
-            }
-
-            _consoleWrapper.WriteLine(mainMenuItems);
+            _consoleWrapper.WriteLine(test);
         }
 
         public string GetUserInput()
