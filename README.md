@@ -14,3 +14,4 @@ reportgenerator "-reports:TestResults\GUID\coverage.cobertura.xml" "-targetdir:c
 - MUTATION SCORE?!
 - Add JSONP converter class to replace functionality in the GetTrack Method
 - (string)responseJson["message"]["body"]["track"]["track_id"] in GetTrack Method could be replace with a jsonreader class
+- WE NEED TO CHANGE Task<TrackID> to Task<ITrackID> stuff to work
