@@ -20,5 +20,38 @@ namespace LyricsAppTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void PromptQuestion_ShouldCallReadLine()
+        {
+            Mock<IConsoleWrapper> mockConsole = new Mock<IConsoleWrapper>();
+            Prompt sut = new Prompt(mockConsole.Object);
+
+            sut.PromptQuestion(It.IsAny<string>());
+
+            mockConsole.Verify(c => c.ReadLine());
+        }
+
+        [Fact]
+        public void PromptQuestion_ShouldCallWriteLine()
+        {
+            Mock<IConsoleWrapper> mockConsole = new Mock<IConsoleWrapper>();
+            Prompt sut = new Prompt(mockConsole.Object);
+
+            sut.PromptQuestion(It.IsAny<string>());
+
+            mockConsole.Verify(c => c.WriteLine(It.IsAny<string>()));
+        }
+
+        [Fact]
+        public void PromptQuestion_ShouldCallWrite()
+        {
+            Mock<IConsoleWrapper> mockConsole = new Mock<IConsoleWrapper>();
+            Prompt sut = new Prompt(mockConsole.Object);
+
+            sut.PromptQuestion(It.IsAny<string>());
+
+            mockConsole.Verify(c => c.Write(It.IsAny<string>()));
+        }
     }
 }

@@ -7,31 +7,23 @@ namespace View
 {
     public class Menu
     {
-        private IConsoleWrapper _consoleWrapper;
+        private IPrompt _prompt;
         private List<string> _menuItems = new List<string> { "Find Lyric", "Quit" };
         private string _promptArtistMessage = "Enter Artist Name";
-        public Menu(IConsoleWrapper consoleWrapper)
+        public Menu(IPrompt prompt)
         {
-            _consoleWrapper = consoleWrapper;
+            _prompt = prompt;
         }
 
-        public void ShowMainMenu()
+        public string ShowMainMenuGetUserSelection()
         {
-            string test = String.Join("\n", (_menuItems.Select((item, index) => $"{index + 1}: {item}")));
-
-            _consoleWrapper.WriteLine(test);
+            string menuItems = String.Join("\n", (_menuItems.Select((item, index) => $"{index + 1}: {item}")));
+            return _prompt.PromptQuestion(menuItems);
         }
 
-        public string GetUserInput()
+        public IArtist GetArtist()
         {
-            return _consoleWrapper.ReadLine();
-        }
-
-        public IArtist PromptArtistName()
-        {
-            _consoleWrapper.WriteLine(_promptArtistMessage);
-            _consoleWrapper.Write(">");
-            string artistName = _consoleWrapper.ReadLine();
+            string artistName = _prompt.PromptQuestion(_promptArtistMessage);
             return new Artist(artistName);
         }
     }
