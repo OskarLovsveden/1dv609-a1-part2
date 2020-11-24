@@ -10,6 +10,7 @@ namespace View
         private IPrompt _prompt;
         private List<string> _menuItems = new List<string> { "Find Lyric", "Quit" };
         private string _promptArtistMessage = "Enter Artist Name";
+        private string _promptSongTitle = "Enter Song Title";
         public Menu(IPrompt prompt)
         {
             _prompt = prompt;
@@ -29,7 +30,8 @@ namespace View
 
         public ITitle GetSongTitle()
         {
-            throw new NotImplementedException();
+            string songTitle = _prompt.PromptQuestion(_promptSongTitle);
+            return new Title(songTitle);
         }
     }
 }
