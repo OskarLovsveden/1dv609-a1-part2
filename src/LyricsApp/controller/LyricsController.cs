@@ -28,6 +28,7 @@ namespace Controller
                         break;
                     case MenuOption.SelectSong:
                         _menu.GetArtist();
+                        _menu.GetSongTitle();
                         break;
                     default:
                         break;
