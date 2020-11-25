@@ -29,6 +29,7 @@ namespace Controller
                     case MenuOption.SelectSong:
                         IArtist artist = _menu.GetArtist();
                         ITitle title = _menu.GetSongTitle();
+                        ISong song = _songDAL.GetSong(artist, title).Result;
                         break;
                     default:
                         break;
