@@ -18,9 +18,9 @@ namespace View
 
         public MenuOption ShowMainMenuGetUserSelection()
         {
-            /* string menuItems = String.Join("\n", (_menuItems.Select((item, index) => $"{index + 1}: {item}")));
-            return _prompt.PromptQuestion(menuItems); */
-            throw new NotImplementedException();
+            string menuItems = String.Join("\n", (_menuItems.Select((item, index) => $"{index + 1}: {item}")));
+            int selection = Int32.Parse(_prompt.PromptQuestion(menuItems));
+            return (MenuOption)selection;
         }
 
         public IArtist GetArtist()
