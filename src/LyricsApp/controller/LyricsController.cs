@@ -27,8 +27,8 @@ namespace Controller
                         _appState.Current = _menu.ShowMainMenuGetUserSelection();
                         break;
                     case MenuOption.SelectSong:
-                        _menu.GetArtist();
-                        _menu.GetSongTitle();
+                        IArtist artist = _menu.GetArtist();
+                        ITitle title = _menu.GetSongTitle();
                         break;
                     default:
                         break;
