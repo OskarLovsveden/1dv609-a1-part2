@@ -1,3 +1,4 @@
+using System;
 using View;
 
 namespace Model
@@ -8,5 +9,10 @@ namespace Model
         private MenuOption _current = MenuOption.ShowMenu;
         public bool ShouldRun { get => _shouldRun; set => _shouldRun = value; }
         public MenuOption Current { get => _current; set => _current = value; }
+
+        public void Exit()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -7,5 +7,7 @@ namespace Model
         bool ShouldRun { get; set; }
 
         MenuOption Current { get; set; }
+
+        void Exit();
     }
 }
