@@ -23,7 +23,7 @@ namespace View
             int selection;
             bool inputWasValid = Int32.TryParse(_prompt.PromptQuestion(menuItems), out selection);
 
-            if (inputWasValid == false)
+            if (inputWasValid == false || Enum.IsDefined(typeof(MenuOption), selection) == false)
             {
                 return MenuOption.ShowMenu;
             }
