@@ -5,7 +5,7 @@ using Model;
 using View.utils;
 namespace View
 {
-    public class Menu
+    public class Menu : IMenu
     {
         private IPrompt _prompt;
         private List<string> _menuItems = new List<string> { "Find Lyric", "Quit" };

@@ -8,7 +8,7 @@ using System;
 
 namespace Model.DAL
 {
-    public class SongDAL
+    public class SongDAL : ISongDAL
     {
         private readonly string getLyricURL = "track.lyrics.get";
         private Settings settings = new Settings();

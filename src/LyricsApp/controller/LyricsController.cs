@@ -1,13 +1,20 @@
+using System;
+using Model;
+using Model.DAL;
+using View;
+
 namespace Controller
 {
     public class LyricsController
     {
-        public bool ShouldRun { get; set; }
-
-        /* private StateThing statething */
-        public LyricsController()
+        private IAppState _appState;
+        private IMenu _menu;
+        private ISongDAL _songDAL;
+        public LyricsController(IAppState appState, IMenu menu, ISongDAL songDAL)
         {
-            // Empty
+            _appState = appState;
+            _menu = menu;
+            _songDAL = songDAL;
         }
 
         public void Run()
@@ -26,9 +33,7 @@ namespace Controller
                 }
 
                 systemEXit */
+            throw new NotImplementedException();
         }
-
-
-
     }
 }
