@@ -16,10 +16,11 @@ namespace View
             _prompt = prompt;
         }
 
-        public string ShowMainMenuGetUserSelection()
+        public MenuOption ShowMainMenuGetUserSelection()
         {
-            string menuItems = String.Join("\n", (_menuItems.Select((item, index) => $"{index + 1}: {item}")));
-            return _prompt.PromptQuestion(menuItems);
+            /* string menuItems = String.Join("\n", (_menuItems.Select((item, index) => $"{index + 1}: {item}")));
+            return _prompt.PromptQuestion(menuItems); */
+            throw new NotImplementedException();
         }
 
         public IArtist GetArtist()

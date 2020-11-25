@@ -9,14 +9,14 @@ namespace LyricsAppTests
     public class MenuTests
     {
         [Fact]
-        public void ShowMainMenu_DisplaysMenuItems()
+        public void ShowMainMenuGetUserSelectio_ReturnsCorrectEnum()
         {
-            string input = "test";
+            string input = "1";
 
             Menu sut = GetSystemUnderTest(input);
 
-            string expected = input;
-            string actual = sut.ShowMainMenuGetUserSelection();
+            MenuOption expected = MenuOption.SelectSong;
+            MenuOption actual = sut.ShowMainMenuGetUserSelection();
 
             Assert.Equal(expected, actual);
         }

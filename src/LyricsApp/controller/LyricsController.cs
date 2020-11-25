@@ -1,10 +1,34 @@
-// run () =>
-// while start
-// show main menu
-// menu.getinput
-// song artist prompt
-// menu.getinput
-// song title prompt
-// menu.getinput
-// display lyrics
-// while end
+namespace Controller
+{
+    public class LyricsController
+    {
+        public bool ShouldRun { get; set; }
+
+        /* private StateThing statething */
+        public LyricsController()
+        {
+            // Empty
+        }
+
+        public void Run()
+        {
+            /*     while(stateThing.shouldRun){
+                    switch
+                    case whatTodO.ShowMenu
+                        determineNextState = view.ShowMenu
+
+                    case artistSEarch
+                        artistGet
+                        titleGet
+                        otherStuff
+                    caase quit
+                        stateThing.shouldRun = false                    
+                }
+
+                systemEXit */
+        }
+
+
+
+    }
+}
