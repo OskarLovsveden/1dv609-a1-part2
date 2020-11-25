@@ -13,11 +13,7 @@ namespace LyricsAppTests
         [Fact]
         public void Run_ShouldCallCorrectMethodDependentOnState()
         {
-            Mock<IAppState> mockAppState = new Mock<IAppState>();
-            mockAppState.SetupSequence(state => state.ShouldRun)
-            .Returns(true)
-            .Returns(false);
-            mockAppState.Setup(state => state.Current).Returns(MenuOption.ShowMenu);
+            Mock<IAppState> mockAppState = GetAppStateMock_CurrentState(MenuOption.ShowMenu);
 
             Mock<IMenu> mockMenu = new Mock<IMenu>();
             Mock<ISongDAL> mockSongDAL = new Mock<ISongDAL>();
@@ -26,6 +22,17 @@ namespace LyricsAppTests
             sut.Run();
 
             mockMenu.Verify(menu => menu.ShowMainMenuGetUserSelection());
+        }
+
+        private Mock<IAppState> GetAppStateMock_CurrentState(MenuOption menuOption)
+        {
+            Mock<IAppState> mockAppState = new Mock<IAppState>();
+            mockAppState.SetupSequence(state => state.ShouldRun)
+            .Returns(true)
+            .Returns(false);
+            mockAppState.Setup(state => state.Current).Returns(menuOption);
+
+            return mockAppState;
         }
     }
 }
