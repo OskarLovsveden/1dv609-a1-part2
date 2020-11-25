@@ -23,12 +23,12 @@ namespace View
             int selection;
             bool inputWasValid = Int32.TryParse(_prompt.PromptQuestion(menuItems), out selection);
 
-            if (inputWasValid)
+            if (inputWasValid == false)
             {
-                return (MenuOption)selection;
+                return MenuOption.ShowMenu;
             }
 
-            return MenuOption.ShowMenu;
+            return (MenuOption)selection;
         }
 
         public IArtist GetArtist()
