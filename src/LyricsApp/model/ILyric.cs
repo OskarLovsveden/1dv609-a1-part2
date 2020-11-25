@@ -1,4 +1,3 @@
-
 namespace Model
 {
     public interface ILyric

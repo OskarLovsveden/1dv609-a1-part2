@@ -1,5 +1,3 @@
-using View;
-
 namespace Model
 {
     public interface IAppState

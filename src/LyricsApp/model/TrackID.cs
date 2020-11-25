@@ -1,4 +1,3 @@
-using System;
 namespace Model
 {
     public class TrackID : ITrackID
@@ -15,6 +14,5 @@ namespace Model
         {
             Value = id;
         }
-
     }
 }

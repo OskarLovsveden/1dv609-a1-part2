@@ -1,4 +1,5 @@
 using System;
+
 namespace View.utils
 {
     public class ConsoleWrapper : IConsoleWrapper

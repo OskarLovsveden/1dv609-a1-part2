@@ -1,4 +1,4 @@
-namespace View
+namespace Model
 {
     public enum MenuOption
     {

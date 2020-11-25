@@ -1,4 +1,3 @@
-using System;
 using Model;
 using Model.DAL;
 using View;
@@ -41,17 +40,3 @@ namespace Controller
         }
     }
 }
-/*       while(stateThing.shouldRun){
-          switch
-          case whatTodO.ShowMenu
-              determineNextState = view.ShowMenu
-
-          case artistSEarch
-              artistGet
-              titleGet
-              otherStuff
-          caase quit
-              stateThing.shouldRun = false                    
-      }
-
-      systemEXit */

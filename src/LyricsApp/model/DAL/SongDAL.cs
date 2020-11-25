@@ -1,10 +1,8 @@
-using System.Net;
 using CustomException;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Config;
 using Newtonsoft.Json.Linq;
-using System;
 
 namespace Model.DAL
 {

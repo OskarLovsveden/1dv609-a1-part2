@@ -5,7 +5,6 @@ using View;
 using View.utils;
 using System.Collections.Generic;
 using System;
-using System.Linq;
 
 namespace LyricsAppTests
 {

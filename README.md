@@ -4,14 +4,18 @@
 
 A simple app for showing data about a songs lyric.
 
-dotnet test --collect:"XPlat Code Coverage"
-reportgenerator "-reports:TestResults\GUID\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+## How to generate code coverage
 
-### TODO
+- Create TestResults Folder - dotnet test --collect:"XPlat Code Coverage"
+- Generate Report - reportgenerator "-reports:TestResults\{GUID - Folder Created In TestResults Folder}Test\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+- Open index.html in the coveragereport folder in any browser.
 
-- Factory for creating new instances of class. (example: Lyric)
+### TODO - Things considered for future implementation
+
+- Factory for creating new instances of classes
 - Getting wordcount/frequency should/could be own class. (CountWordFrequency and StripApostrophes in Lyric)
-- MUTATION SCORE?!
-- Add JSONP converter class to replace functionality in the GetTrack Method
-- (string)responseJson["message"]["body"]["track"]["track_id"] in GetTrack Method could be replace with a jsonreader class
-- ConsoleWrapperTests -> using http://www.vtrifonov.com/2012/11/getting-console-output-within-unit-test.html
+- Add JSONP converter class to replace functionality in GetTrack Method in TrackDAL class.
+- (string)responseJson["message"]["body"]["track"]["track_id"] in GetTrack Method in TrackDAL class could be replace with a jsonreader class.
+- ConsoleWrapperTests could benefit from this style: http://www.vtrifonov.com/2012/11/getting-console-output-within-unit-test.html
+- App should show lyrics searched for in the console.
+- User should be able to get a word frequency of the current lyric shown by navigating the console.

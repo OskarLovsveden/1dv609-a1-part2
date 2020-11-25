@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+
 namespace Model
 {
     public class Lyric : ILyric

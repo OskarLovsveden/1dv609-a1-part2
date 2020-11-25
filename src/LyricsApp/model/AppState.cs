@@ -1,6 +1,3 @@
-using System;
-using View;
-
 namespace Model
 {
     public class AppState : IAppState

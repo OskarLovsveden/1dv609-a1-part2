@@ -4,7 +4,6 @@ using Model;
 using Model.DAL;
 using Controller;
 using View;
-using View.utils;
 
 namespace LyricsAppTests
 {
