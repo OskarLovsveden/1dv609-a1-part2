@@ -3,14 +3,24 @@ using Moq;
 using Model;
 using View;
 using View.utils;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace LyricsAppTests
 {
     public class MenuTests
     {
+        public static IEnumerable<object[]> enums()
+        {
+            foreach (int value in Enum.GetValues(typeof(MenuOption)))
+            {
+                yield return new object[] { value, (MenuOption)value };
+            }
+        }
+
         [Theory]
-        [InlineData("1", MenuOption.SelectSong)]
-        [InlineData("2", MenuOption.Quit)]
+        [MemberData("enums")]
         public void ShowMainMenuGetUserSelectio_ReturnsCorrectEnum(string input, MenuOption expected)
         {
             Menu sut = GetSystemUnderTest(input);
@@ -22,6 +32,7 @@ namespace LyricsAppTests
 
         [Theory]
         [InlineData("faulty input")]
+        [InlineData("0")]
         [InlineData("42")]
         public void ShowMainMenuGetUserSelectio_ReturnsMenuOptionShowMenuByDefault(string input)
         {

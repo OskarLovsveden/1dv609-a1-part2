@@ -22,8 +22,9 @@ namespace View
 
             int selection;
             bool inputWasValid = Int32.TryParse(_prompt.PromptQuestion(menuItems), out selection);
+            bool enumExists = Enum.IsDefined(typeof(MenuOption), selection);
 
-            if (inputWasValid == false || Enum.IsDefined(typeof(MenuOption), selection) == false)
+            if (inputWasValid == false || enumExists == false)
             {
                 return MenuOption.ShowMenu;
             }
