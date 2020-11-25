@@ -20,6 +20,18 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void ShowMainMenuGetUserSelectio_ReturnsMenuOptionShowMenuByDefault()
+        {
+            string input = "faulty input";
+            Menu sut = GetSystemUnderTest(input);
+
+            MenuOption expected = MenuOption.ShowMenu;
+            MenuOption actual = sut.ShowMainMenuGetUserSelection();
+
+            Assert.Equal(expected, actual);
+        }
+
         [Theory]
         [InlineData("ABBA")]
         [InlineData("Metallica")]

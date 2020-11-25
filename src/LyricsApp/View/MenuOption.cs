@@ -3,6 +3,7 @@ namespace View
     public enum MenuOption
     {
         SelectSong = 1,
-        Quit
+        Quit,
+        ShowMenu
     }
 }
