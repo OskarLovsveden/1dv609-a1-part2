@@ -14,7 +14,9 @@ namespace LyricsAppTests
         public void Run_ShouldCallCorrectMethodDependentOnState()
         {
             Mock<IAppState> mockAppState = new Mock<IAppState>();
-            mockAppState.Setup(state => state.ShouldRun).Returns(true);
+            mockAppState.SetupSequence(state => state.ShouldRun)
+            .Returns(true)
+            .Returns(false);
             mockAppState.Setup(state => state.Current).Returns(MenuOption.ShowMenu);
 
             Mock<IMenu> mockMenu = new Mock<IMenu>();

@@ -19,21 +19,31 @@ namespace Controller
 
         public void Run()
         {
-            /*     while(stateThing.shouldRun){
-                    switch
-                    case whatTodO.ShowMenu
-                        determineNextState = view.ShowMenu
-
-                    case artistSEarch
-                        artistGet
-                        titleGet
-                        otherStuff
-                    caase quit
-                        stateThing.shouldRun = false                    
+            while (_appState.ShouldRun)
+            {
+                switch (_appState.Current)
+                {
+                    case MenuOption.ShowMenu:
+                        _appState.Current = _menu.ShowMainMenuGetUserSelection();
+                        break;
+                    default:
+                        break;
                 }
-
-                systemEXit */
-            throw new NotImplementedException();
+            }
         }
     }
 }
+/*       while(stateThing.shouldRun){
+          switch
+          case whatTodO.ShowMenu
+              determineNextState = view.ShowMenu
+
+          case artistSEarch
+              artistGet
+              titleGet
+              otherStuff
+          caase quit
+              stateThing.shouldRun = false                    
+      }
+
+      systemEXit */
