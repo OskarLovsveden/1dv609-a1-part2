@@ -20,10 +20,11 @@ namespace LyricsAppTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void ShowMainMenuGetUserSelectio_ReturnsMenuOptionShowMenuByDefault()
+        [Theory]
+        [InlineData("faulty input")]
+        [InlineData("42")]
+        public void ShowMainMenuGetUserSelectio_ReturnsMenuOptionShowMenuByDefault(string input)
         {
-            string input = "faulty input";
             Menu sut = GetSystemUnderTest(input);
 
             MenuOption expected = MenuOption.ShowMenu;
