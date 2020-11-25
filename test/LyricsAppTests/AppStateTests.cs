@@ -7,7 +7,7 @@ namespace LyricsAppTests
     public class AppStateTests
     {
         [Fact]
-        public void soemthing()
+        public void Exit_ShouldSetShouldRunToFalse()
         {
             IAppState sut = new AppState();
             sut.Exit();
