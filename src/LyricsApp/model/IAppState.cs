@@ -4,7 +4,7 @@ namespace Model
 {
     public interface IAppState
     {
-        bool ShouldRun { get; set; }
+        bool ShouldRun { get; }
 
         MenuOption Current { get; set; }
 
