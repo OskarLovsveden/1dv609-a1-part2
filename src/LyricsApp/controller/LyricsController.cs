@@ -31,6 +31,9 @@ namespace Controller
                         ITitle title = _menu.GetSongTitle();
                         ISong song = _songDAL.GetSong(artist, title).Result;
                         break;
+                    case MenuOption.Quit:
+                        _appState.Exit();
+                        break;
                     default:
                         break;
                 }
