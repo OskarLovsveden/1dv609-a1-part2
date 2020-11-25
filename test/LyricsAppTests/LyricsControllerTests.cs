@@ -11,7 +11,7 @@ namespace LyricsAppTests
     public class LyricsControllerTests
     {
         [Fact]
-        public void Run_ShouldCallCorrectMethodDependentOnState()
+        public void Run_MenuOptionShowMenu_ShouldCallShowMainMenuGetUserSelection()
         {
             Mock<IAppState> mockAppState = GetAppStateMock_CurrentState(MenuOption.ShowMenu);
 
@@ -33,7 +33,6 @@ namespace LyricsAppTests
             Mock<ISongDAL> mockSongDAL = new Mock<ISongDAL>();
 
             LyricsController sut = new LyricsController(mockAppState.Object, mockMenu.Object, mockSongDAL.Object);
-
             sut.Run();
 
             mockMenu.Verify(menu => menu.GetArtist());
