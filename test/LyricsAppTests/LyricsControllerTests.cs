@@ -56,6 +56,19 @@ namespace LyricsAppTests
 
             mockSongDAL.Verify(songDAL => songDAL.GetSong(It.IsAny<IArtist>(), It.IsAny<ITitle>()));
         }
+        [Fact]
+        public void Run_MenuOptionSelectSong_ShouldCallExit()
+        {
+            Mock<IAppState> mockAppState = GetAppStateMock_CurrentState(MenuOption.Quit);
+
+            Mock<IMenu> mockMenu = new Mock<IMenu>();
+            Mock<ISongDAL> mockSongDAL = new Mock<ISongDAL>();
+
+            LyricsController sut = new LyricsController(mockAppState.Object, mockMenu.Object, mockSongDAL.Object);
+            sut.Run();
+
+            mockAppState.Verify(appState => appState.Exit());
+        }
 
         private LyricsController GetSystemUnderTest(MenuOption menuOption, Mock<IMenu> menuMock)
         {
