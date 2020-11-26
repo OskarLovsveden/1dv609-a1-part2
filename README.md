@@ -6,8 +6,10 @@ A simple app for showing data about a songs lyric.
 
 ## How to generate code coverage
 
-- Create TestResults Folder - dotnet test --collect:"XPlat Code Coverage"
-- Generate Report - reportgenerator "-reports:TestResults\{GUID - Folder Created In TestResults Folder}Test\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+- Create TestResults Folder: `dotnet test --collect:"XPlat Code Coverage"`
+- GUID Folder will be created under TestResults, use this GUID in the next step
+- Generate Report:
+  `reportgenerator "-reports:TestResults\{GUID}\coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html`
 - Open index.html in the coveragereport folder in any browser.
 
 ### TODO - Things considered for future implementation

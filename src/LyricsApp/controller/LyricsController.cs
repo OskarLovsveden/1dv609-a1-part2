@@ -33,8 +33,6 @@ namespace Controller
                     case MenuOption.Quit:
                         _appState.Exit();
                         break;
-                    default:
-                        break;
                 }
             }
         }
